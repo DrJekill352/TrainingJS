@@ -1,0 +1,21 @@
+div{
+    height: 300px;
+    margin: 50px;
+}
+
+/*ищет в той же папке*/
+.firstBlock{
+    background-image: url(./1.jpg);
+}
+/*ищет в той же папке*/
+.secondBlock{
+    background-image: url(2.jpg);
+}
+
+/*'./1.jpg' == '1.jpg'*/
+
+/*не будет работать, так как '/' мы ищем в корневой папке сервера*/
+.thirdBlock{
+    background-image: url(/1.jpg);
+    height: 363px;
+}
