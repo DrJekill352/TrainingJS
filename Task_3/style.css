@@ -1,0 +1,27 @@
+html{
+    font-size: 20px;
+    background-color: rgba(100, 100, 100, 0.3);
+    text-align: center;
+}
+
+*{
+    letter-spacing:10px;
+    line-height: 3rem;
+}
+
+div{
+    text-transform: uppercase;
+}
+
+.four ~ div{
+    text-transform: lowercase;
+}
+
+div:nth-child(even){
+    color: red;
+}
+
+div:nth-child(odd){
+    color: blue;
+    font-size: 2rem;
+}
