@@ -1,0 +1,70 @@
+html{
+    font-size: 20px
+}
+
+iframe{
+    width: 98%;
+    margin-top: 35px;
+}
+
+a{ 
+    text-decoration: none;
+} 
+
+table{
+    width: 98%;
+}
+
+hr{
+    opacity: 0.8
+}
+
+.content{
+    width: 100vw
+}
+
+.substring{
+    font-size: 0.8rem;
+}
+
+.title{
+    opacity: 0.4;
+}
+
+.error{
+    border-top: 2px solid red;
+    color: red;
+}
+
+.inrut{
+    height: 80%;
+}
+
+.indent{
+    padding-bottom: 15px;
+}
+
+.icon{
+    text-align: right;
+}
+
+.icon-cross{
+    font-size: 500%;
+    margin-right: 20px;
+    color: red;
+}
+
+.icon-cross:hover{
+    color: #3c9eff;
+}
+
+.icon-cross:active{
+    color: rgb(0, 255, 0);
+}
+
+.icon-arrow-down{
+    color: gray;
+    opacity: 0.55;
+    font-size: 60%;
+    margin-left: 6px;
+}
