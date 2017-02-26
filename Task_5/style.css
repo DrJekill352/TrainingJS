@@ -1,0 +1,78 @@
+.header{
+    width: 100vw;
+    height: 30vh;
+    background-image: url("./socialsprites.png");
+    position: relative;
+}
+
+.header-text{
+    background-color: white;
+    text-align: center;
+    padding: 31px 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text{
+    padding: 10px;
+    border: 3px solid black;
+    font-size: 90px;
+    font-family: 'Tangerine', serif;
+}
+
+.block{
+    margin: 10px 15px;
+    padding: 35px 35px;
+    border: 2px solid black;
+}
+
+.firstBlock{
+     border: 2px solid rgb(234, 234, 234);
+}
+
+.secondBlock{
+     background-color: rgb(51, 51, 51)
+}
+
+.secondBlock button{
+     border: 2px solid rgb(100, 100, 100);
+}
+
+.button{
+    color: white;
+    margin: 7px 0;
+    border-radius: 7px;
+    padding: 5px 9px;
+}
+
+.pink{
+    background-color: rgb(231, 82, 170);
+    font-size: 25px;
+} 
+
+.green{
+    background-color: rgb(161, 197, 44);
+}
+
+.blue{
+    background-color: rgb(77, 150, 232);
+}
+
+.red{
+    background-color: rgb(235, 82, 82);
+}
+
+.orange{
+    background-color: rgb(255, 115, 35);
+}
+
+.yellow{
+    background-color: rgb(255, 192, 55);
+}
+
+button:active 
+{
+    box-shadow: inset 0px 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
