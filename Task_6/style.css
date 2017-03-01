@@ -1,0 +1,75 @@
+body{
+    width: 100vw;
+}
+.form{
+    padding: 0 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header__titel{
+    font-size: 1.4rem;
+}
+
+.header__second-path-titel{
+    background-color: rgb(237, 237, 237); 
+}
+
+.choice__fields-radio-buttons{
+    margin: 5px 0;
+    padding: 10px 0;
+    border: 2px solid rgb(200, 200, 200);
+}
+
+.add-button__button{
+    background: rgb(0, 133, 186);
+    padding: 10px 12px;
+    font-size: 1rem;
+    color: white;
+    border-radius: 8px;
+}
+
+.add-button__button:active{
+    box-shadow: inset 0px 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.field-label__input{
+    width: 80%;
+}
+
+.choice__text-radio-button{
+    width: 90%;
+}
+.choice__second-field-radio-button{
+    margin: 10px 0 0 0;
+}
+
+.choice__icon-cross{
+    color: rgb(156, 156, 156);
+    font-size: 13px;
+}
+
+.choice__icon-cross:hover{
+    color: red;
+}
+
+.choice__text-radio-button:focus{
+    border-color: red;
+}
+
+.field-label__input:focus{
+    border-color: red;
+}
+
+
+.input-font-size{
+    font-size: 1rem;
+}
+
+.form-margin{
+    margin: 20px 0;	
+}
+ 
+.form-titels{
+    margin: 10px 0;
+    font-weight: bold;
+}

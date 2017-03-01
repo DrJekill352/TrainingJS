@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 6</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styleIcon.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+    <form action="/" method="GET" class="form">
+        <div class="header form__header"> 
+            <div class="header__titel form-titels form-margin">   
+                <span class="header__first-path-titel">Form Action</span>
+                <span class="header__second-path-titel">_mc4wp_action</span>
+            </div>
+
+            <div class="header__text form-margin">This field will allow your visitors to choose whether they
+                                        would like to subscribe or unsubscribe</div> 
+        </div>
+        <div class="field-label form__field-label form-margin">
+            <div class="field-label__title form-titels">Field Label</div>
+            <input class="field-label__input input-font-size" type="text" value="Form Action">
+        </div>
+        <div class="choice-type form__choice-type form-margin">
+            <div class="choice-type__titel form-titels">Choice Type</div>
+            <select class="choice-type__dropbox input-font-size">
+                <option value="radio-buttons">Radio Bottons</option>
+            </select>
+        </div>
+        <div class="choice form__choice form-margin">
+            <div class="choice__titel form-titels">Choice</div>
+            <fieldset class="choice__fields-radio-buttons">
+                <div class="choice__first-field-radio-button">
+                    <input class="choice__radio-button" type="radio" value="subscribe">
+                    <input class="choice__text-radio-button input-font-size" type="text" value="Subscribe">
+                    <span class="choice__icon-cross icon-cross"></span>
+                </div>
+                <div class="choice__second-field-radio-button">
+                     <input class="choice__radio-button" type="radio" value="unsubscribe">
+                     <input class="choice__text-radio-button input-font-size"type="text" value="Unsubscribe">
+                     <span class="choice__icon-cross icon-cross"></span>
+                </div>
+            </fieldset>
+        </div>
+        <div class="checkbox form__checkbox form-margin">
+            <input class="checkbox__checkbox" type="checkbox">
+            <span class="checkbox__info">Wrap in paragraph tags?</span>
+        </div>
+        <div class="add-button form__add-button form-margin">
+            <input class="add-button__button" type="submit" value="Add to form">
+        </div>
+    </form>
+</body>
+</html>
