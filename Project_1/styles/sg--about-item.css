@@ -1,0 +1,23 @@
+sg--about-item{
+    display: block;
+    background: url("../image/tm-sigma-00.jpg") no-repeat center center fixed;
+    padding: 100px 0 80px 0;
+}
+
+sg--about-item--titel {
+    display: block;
+    width: 50%;
+    margin: 0 0 8px 25%;
+    font-size: 40px;
+    text-align: center;
+}
+
+sg--about-item--text {
+    display: block;
+    width: 50%;
+    margin: 28px 0 16px 25%;
+    font-size: 18px;
+    color: rgb(85, 85, 85);
+    line-height: 36px;
+    text-align: center;
+}

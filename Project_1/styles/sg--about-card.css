@@ -1,0 +1,97 @@
+sg--about-card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 1px solid white;
+}
+
+sg--about-card--titel {
+    display: block;
+    padding: 30px 20px 8px 20px;
+    font-size: 24px;
+}
+
+sg--about-card--text {
+    display: block;
+    padding: 20px 20px 46px 20px;
+    line-height: 28px;
+}
+
+sg--about-card-button {
+    -webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb;
+    display: inline-block;
+    font-size: 20px;
+    padding: 12px 20px;
+    margin: 0 0 0 20px;
+}
+
+sg--about-card.desing {
+    color: rgb(55, 58, 60);
+    background-color: rgb(228, 232, 232);
+}
+
+sg--about-card.coding {
+    color: white;
+    background-color: rgb(153, 153, 153);
+}
+
+sg--about-card.mobile {
+    color: white;
+    background-color: rgb(102, 102, 102);
+}
+
+sg--about-card.left-column {
+    background-color: rgb(238, 187, 238);
+}
+
+sg--about-card.right-column {
+    background-color: rgb(146, 196, 248);
+}
+
+sg--about-card.left-column sg--about-card--text {
+    padding: 20px 20px 16px 20px;
+}
+
+sg--about-card.left-column sg--about-card-button {
+    color: white;
+    background-color: rgb(2, 117, 216);
+    border-bottom-color: rgb(2, 117, 216);
+    margin: 0 0 30px 20px;
+}
+
+sg--about-card.left-column sg--about-card-button:hover {
+    box-shadow: inset 0px 0px 0px 67px rgb(2, 90, 165);
+}
+
+sg--about-card.right-column sg--about-card--text {
+    padding: 20px 20px 16px 20px;
+}
+
+sg--about-card.right-column sg--about-card-button {
+    color: white;
+    background-color: rgb(201, 48, 44);
+    border-bottom-color: rgb(193, 46, 42);
+    margin: 0 0 30px 20px;
+}
+
+sg--about-card.right-column sg--about-card-button:hover {
+    box-shadow: inset 0px 0px 0px 67px rgb(201, 48, 44);
+}
+
+sg--about-card.out-team {
+    color: white;
+    background-color: rgb(170, 85, 34);
+}
+sg--about-card.history {
+    color: white;
+    background-color: rgb(34, 136, 187);
+}
+sg--about-card.management {
+    color: white;
+    background-color: rgb(68, 153, 102);
+}
+sg--about-card.career {
+    color: white;
+    background-color: rgb(164, 164, 48);
+}
