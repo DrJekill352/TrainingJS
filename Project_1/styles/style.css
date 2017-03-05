@@ -1,8 +1,5 @@
-html, body{
+body {
     height: 100%;
-}
-
-body{
     font-family: 'Open Sans', sans-serif;
     padding: 0 70px;
     display: flex;

@@ -1,9 +1,10 @@
-sg--home-item{
+sg--home-item {
     display: block;
     background: url("../image/tm-sigma-00.jpg") no-repeat center center fixed;
     padding: 150px 0;
 }
-sg--home-item--titel{
+
+sg--home-item--titel {
     display: block;
     width: 50%;
     margin: 0 0 8px 25%;
@@ -21,31 +22,36 @@ sg--home-item--text {
     text-align: center;
 }
 
-sg--home-item--buttons{
+sg--home-item--buttons {
     display: block;
     width: 50%;
     margin: 0 0 0 25%;
     text-align: center;
 }
 
-sg--home-item-button{
+sg--home-item-button {
     -webkit-appearance: button;
-    display: inline-block;
-    margin: 10px;
-    padding: 20px 0;
-    min-width: 200px;
+    -webkit-writing-mode: horizontal-tb;
     font-size: 22px;
-    text-align: center;
-    font-weight: 400;
+    padding: 23px 44px;
+    border-radius: 0.25rem;
     color: white;
-    border-radius: 20px;/*!!*/
 }
 
-sg--home-item-button.go-to-about-button{
-    background-color: rgb(91, 184, 93);
-    border-color: rgb(91, 184, 93);
+sg--home-item-button.go-to-about-button {
+    background-color: #449d44;
+    border-color: #419641;
 }
-sg--home-item-button.go-to-gallary-button{
-    background-color: rgb(218, 85, 80);
-    border-color: rgb(218, 85, 80);
+
+sg--home-item-button.go-to-gallary-button {
+    background-color: #c9302c;
+    border-color: #c12e2a;
+}
+
+sg--home-item-button.go-to-gallary-button:hover {
+    box-shadow: inset 0px 0px 0px 67px rgb(201, 48, 44);
+}
+
+sg--home-item-button.go-to-about-button:hover {
+    box-shadow: inset 0px 0px 0px 67px rgb(49, 103, 49);
 }

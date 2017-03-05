@@ -1,0 +1,9 @@
+sg--image-card{
+    width: 100%;
+    display: block;
+    border: 1px solid white;
+}
+
+sg--image-card img{
+    width: 100%;
+}

@@ -1,0 +1,14 @@
+sg--item-group-4 {
+     width: 100%;
+     height: 100%;
+     display: flex;
+     flex-direction: row;
+     justify-content: flex-start;
+     align-items: flex-start;
+ }
+
+sg--item-group-4--item {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
