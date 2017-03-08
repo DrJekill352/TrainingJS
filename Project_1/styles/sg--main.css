@@ -1,0 +1,28 @@
+sg--main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+sg--main--header {
+    display: block;
+    width: 100%;
+}
+
+sg--main--line {
+    display: block;
+    width: 100%;
+    color: rgb(55, 58, 60);
+    opacity: 0.3;
+}
+
+sg--main--content {
+    display: block;
+    width: 100%;
+    flex-grow: 1;
+}
+
+sg--main--footer {
+    display: block;
+    width: 100%;
+}

@@ -1,15 +1,14 @@
 sg--heirach-item-group-3{
     display: flex;
-    width: 100%;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
 sg--heirach-item-group-3--main-item{
-    width: 201%;
+    width: 200%;
     display: block;
-    flex-grow: 2;
+    flex-grow: 1;
 }
 
 sg--heirach-item-group-3--collater-items{
@@ -19,7 +18,6 @@ sg--heirach-item-group-3--collater-items{
 }
 
 sg--heirach-item-group-3--collater-item{
-    width: 100%;
     height: 50%;
     display: block;    
 }

@@ -1,5 +1,23 @@
 sg--footer{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 20px 0;
+}
+
+sg--footer--text{
     display: block;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-grow: 1;
+    font-size: 14px;
+    margin: 0 0 16px;
+}
+
+sg--footer--link{
+    display: block;
+    text-align: end;
+    font-size: 14px;
+    margin: 0 0 16px;
+}
+
+sg--footer--link:hover{
+    color: black;
 }

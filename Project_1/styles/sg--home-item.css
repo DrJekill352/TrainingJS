@@ -2,56 +2,64 @@ sg--home-item {
     display: block;
     background: url("../image/tm-sigma-00.jpg") no-repeat center center fixed;
     padding: 150px 0;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+sg--home-item--content {
+    display: block;
+    width: 50%;
+    margin: auto;
+    text-align: center;
 }
 
 sg--home-item--titel {
     display: block;
-    width: 50%;
-    margin: 0 0 8px 25%;
     font-size: 40px;
-    text-align: center;
 }
 
 sg--home-item--text {
     display: block;
-    width: 50%;
-    margin: 28px 0 16px 25%;
     font-size: 18px;
-    color: rgb(85, 85, 85);
     line-height: 36px;
-    text-align: center;
+    color: rgb(85, 85, 85);
+    margin: 28px 0 16px 0;
 }
 
 sg--home-item--buttons {
     display: block;
-    width: 50%;
-    margin: 0 0 0 25%;
-    text-align: center;
 }
 
-sg--home-item-button {
-    -webkit-appearance: button;
-    -webkit-writing-mode: horizontal-tb;
+sg--home-item-button.about-button button {
+    margin: 10px;
+    padding: 16px 40px;
+    min-width: 200px;
     font-size: 22px;
-    padding: 23px 44px;
-    border-radius: 0.25rem;
+    border-radius: .25rem;
+    line-height: 1.5;
     color: white;
+    background-color: rgb(92, 184, 92);
+    border-color: rgb(92, 184, 92);
 }
 
-sg--home-item-button.go-to-about-button {
-    background-color: #449d44;
-    border-color: #419641;
+sg--home-item-button.gallary-button button {
+    margin: 10px;
+    padding: 16px 40px;
+    min-width: 200px;
+    font-size: 22px;
+    border-radius: .25rem;
+    line-height: 1.5;
+    color: white;
+    background-color: rgb(217, 83, 79);
+    border-color: rgb(217, 83, 79);
 }
 
-sg--home-item-button.go-to-gallary-button {
-    background-color: #c9302c;
-    border-color: #c12e2a;
+sg--home-item-button.gallary-button button:hover {
+    background-color: rgb(201, 48, 44);
+    border-color: rgb(201, 48, 44);
 }
 
-sg--home-item-button.go-to-gallary-button:hover {
-    box-shadow: inset 0px 0px 0px 67px rgb(201, 48, 44);
-}
-
-sg--home-item-button.go-to-about-button:hover {
-    box-shadow: inset 0px 0px 0px 67px rgb(49, 103, 49);
+sg--home-item-button.about-button button:hover {
+    background-color: rgb(49, 103, 49);
+    border-color: rgb(49, 103, 49);
 }

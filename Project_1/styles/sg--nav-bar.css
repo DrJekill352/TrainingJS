@@ -1,14 +1,15 @@
-sg--nav-bar{
+sg--nav-bar {
     display: block;
+    text-align: end;
 }
 
-sg--nav-bar--item a{
+sg--nav-bar--item a {
     font-size: 18px;
-    color: rgba(0,0,0, 0.3);
+    color: rgba(0, 0, 0, 0.3);
     padding: 0.425rem 15px;
     text-decoration: none;
 }
 
-sg--nav-bar--item a:hover{
+sg--nav-bar--item a:hover {
     color: black;
 }
