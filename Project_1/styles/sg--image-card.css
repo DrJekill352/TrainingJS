@@ -1,9 +1,12 @@
 sg--image-card{
     width: 100%;
+    height: 100%;
     display: block;
-    border: 1px solid white;
+    border: 1px solid black;
+    padding: -4px 0 0 0;
 }
 
 sg--image-card img{
     width: 100%;
+    height: 100%;
 }
