@@ -27,3 +27,9 @@ sg--main--footer {
     display: block;
     width: 100%;
 }
+
+@media (max-width: 970px) {
+    sg--main {
+        margin: 0 10px;
+    }
+}

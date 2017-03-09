@@ -4,16 +4,25 @@ sg--header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 sg--header--logo {
     display: block;
-
 }
 
 sg--header--nav-bar {
     display: block;
     flex-grow: 1;
     margin: 0 0 20px 0;
+}
+
+@media (max-width: 768px) {
+    sg--header {
+        flex-direction:column;
+    }
+
+    sg--header--logo{
+        margin: 0 0 0 15px;
+    }
 }

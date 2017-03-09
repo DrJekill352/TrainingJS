@@ -6,5 +6,12 @@ sg--item-group-2 {
 }
 
 sg--item-group-2--item {
+    width: 100%;
     flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    sg--item-group-2 {
+        flex-direction: column;
+    }
 }

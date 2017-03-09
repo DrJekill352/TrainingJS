@@ -9,3 +9,9 @@ sg--item-group-3--item {
     width: 100%;
     flex-grow: 1;
 }
+
+@media (max-width: 970px) {
+    sg--item-group-3 {
+        flex-direction: column;
+    }
+}

@@ -1,23 +1,43 @@
-sg--heirach-item-group-3{
+sg--heirach-item-group-3 {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-sg--heirach-item-group-3--main-item{
+sg--heirach-item-group-3--main-item {
     width: 200%;
     display: block;
     flex-grow: 1;
 }
 
-sg--heirach-item-group-3--collater-items{
+sg--heirach-item-group-3--collater-items {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-sg--heirach-item-group-3--collater-item{
+sg--heirach-item-group-3--collater-item {
     height: 50%;
-    display: block;    
+    display: block;
+}
+
+@media (max-width: 970px) {
+    sg--heirach-item-group-3 {
+        flex-direction: column;
+    }
+
+    sg--heirach-item-group-3--collater-items {
+        flex-direction: row;
+    }
+
+    sg--heirach-item-group-3--main-item {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    sg--heirach-item-group-3--collater-items {
+        flex-direction: column;
+    }
 }
