@@ -4,6 +4,7 @@ sg--about-item{
     padding: 100px 0 80px 0;
     border-right: 1px solid white;
     border-bottom: 1px solid white;
+    color: rgb(55, 58, 60);
 }
 
 sg--about-item--content{
@@ -21,7 +22,6 @@ sg--about-item--titel {
 sg--about-item--text {
     display: block;
     font-size: 18px;
-    color: rgb(85, 85, 85);
     line-height: 36px;
     margin: 28px 0 16px 0;
 }

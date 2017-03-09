@@ -1,0 +1,89 @@
+sg--left-form {
+    display: block;
+    margin: 0 15px;
+    color: rgb(55, 58, 60);
+}
+
+sg--left-form--name-form {
+    display: block;
+    margin: 20px 0;
+}
+
+sg--left-form--titel-name-input {
+    display: inline-block;
+    line-height: 28px;
+    margin: 0 0 8px 0;
+}
+
+sg--left-form--name-input {
+    display: block;
+}
+
+sg--left-form--name-input input {
+    display: block;
+    width: calc(100% - 12px);
+    padding: 6px 0 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+}
+
+sg--left-form--mail-form {
+    display: block;
+    margin: 20px 0;
+}
+
+sg--left-form--titel-mail-input {
+    display: inline-block;
+    line-height: 28px;
+    margin: 0 0 8px 0;
+}
+
+sg--left-form--mail-input {
+    display: block;
+}
+
+sg--left-form--mail-input input{
+    display: block;
+    width: calc(100% - 12px);
+    padding: 6px 0 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+}
+
+sg--left-form--budget-form {
+    display: block;
+    margin: 20px 0;
+}
+
+sg--form--titel-budget-select{
+    display: inline-block;
+    line-height: 28px;
+    margin: 0 0 8px 0;
+}
+
+sg--form--budget-slect{
+    display: block;
+}
+
+sg--form--budget-slect select{
+    display: block;
+    width: 100%;
+    padding: 6px 0 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+}

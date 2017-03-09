@@ -5,6 +5,7 @@ sg--feature-card {
     border-right: 1px solid white;
     border-bottom: 1px solid white;
     padding: 30px 20px;
+    color: rgb(55, 58, 60);
 }
 
 sg--feature-card--icon{
@@ -27,7 +28,6 @@ sg--feature-card--text{
 
 sg--feature-card.design-card{
     background-color: rgb(228, 232, 232);
-    color: rgb(55, 58, 60);
 }
 
 

@@ -1,0 +1,37 @@
+sg--right-form {
+    display: block;
+    padding: 30px 20px;
+    color: rgb(55, 58, 60);
+}
+
+sg--right-form--titel {
+    display: block;
+    font-size: 28px;
+    margin: 0 0 8px 0;
+}
+
+sg--right-form--description {
+    display: block;
+    margin: 28px 0 16px 0;
+    line-height: 28px;
+}
+
+sg--right-form--email {
+    display: block;
+    margin: 36px 0 16px 0;
+}
+
+sg--right-form--phone {
+    display: block;
+    margin: 36px 0 16px 0;
+}
+
+sg--right-form--email-icon{
+    font-size: 30px;
+    padding: 0 10px 0 0;
+}
+
+sg--right-form--phone-icon{
+    font-size: 30px;
+    padding: 0 10px 0 0;
+}

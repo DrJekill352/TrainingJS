@@ -6,5 +6,6 @@ sg--item-group-3 {
 }
 
 sg--item-group-3--item {
+    width: 100%;
     flex-grow: 1;
 }

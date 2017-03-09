@@ -1,0 +1,86 @@
+sg--center-form{
+    display: block;
+    margin: 0 15px;
+    color: rgb(55, 58, 60);
+}
+
+sg--center-form--subject-form{
+    display: block;
+    margin: 20px 0;
+}
+
+sg--center-form--titel-subject-input{
+    display: inline-block;
+    line-height: 28px;
+    margin: 0 0 8px 0;
+}
+
+sg--center-form--subject-input{
+    display: block;
+}
+
+sg--center-form--subject-input input{
+    display: block;
+    width: calc(100% - 12px);
+    padding: 6px 0 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+}
+
+sg--center-form--message-form{
+    display: block;
+    margin: 20px 0;
+}
+
+sg--center-form--titel-message-text-area{
+    display: inline-block;
+    line-height: 28px;
+    margin: 0 0 8px 0;
+}
+
+sg--center-form--message-text-area{
+ display: block;
+}
+
+sg--center-form--message-text-area textarea{
+    display: block;
+    width: calc(100% - 12px);
+    padding: 6px 0 6px 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    resize: vertical;
+    font-family: 'Open Sans', sans-serif;
+}
+
+sg--center-form--not-robot-form{
+    display: block;
+    margin-bottom: .75rem;
+}
+
+sg--form--text-not-robot-check-box{
+    line-height: 28px;
+}
+
+sg--center-form--submit-button{
+    display: block;
+}
+
+sg--center-form--submit-button button{
+    color: #fff;
+    background-color: #5cb85c;
+    border: none;
+    padding: .75rem 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.333333;
+    border-radius: .3rem;
+}

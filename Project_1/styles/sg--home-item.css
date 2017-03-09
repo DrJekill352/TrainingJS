@@ -4,6 +4,7 @@ sg--home-item {
     padding: 150px 0;
     border-right: 1px solid white;
     border-bottom: 1px solid white;
+    color: rgb(55, 58, 60);
 }
 
 sg--home-item--content {
@@ -22,7 +23,6 @@ sg--home-item--text {
     display: block;
     font-size: 18px;
     line-height: 36px;
-    color: rgb(85, 85, 85);
     margin: 28px 0 16px 0;
 }
 
@@ -39,7 +39,7 @@ sg--home-item-button.about-button button {
     line-height: 1.5;
     color: white;
     background-color: rgb(92, 184, 92);
-    border-color: rgb(92, 184, 92);
+    border: none;
 }
 
 sg--home-item-button.gallary-button button {
@@ -50,16 +50,14 @@ sg--home-item-button.gallary-button button {
     border-radius: .25rem;
     line-height: 1.5;
     color: white;
-    background-color: rgb(217, 83, 79);
-    border-color: rgb(217, 83, 79);
+    background-color: #d9534f;
+    border: none;
 }
 
 sg--home-item-button.gallary-button button:hover {
     background-color: rgb(201, 48, 44);
-    border-color: rgb(201, 48, 44);
 }
 
 sg--home-item-button.about-button button:hover {
     background-color: rgb(49, 103, 49);
-    border-color: rgb(49, 103, 49);
 }

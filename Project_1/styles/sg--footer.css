@@ -2,6 +2,7 @@ sg--footer{
     display: flex;
     flex-direction: row;
     padding: 10px 0 20px 0;
+    color: rgb(55, 58, 60);
 }
 
 sg--footer--text{
