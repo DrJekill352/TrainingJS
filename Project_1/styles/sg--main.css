@@ -3,6 +3,7 @@ sg--main {
     flex-direction: column;
     height: 100%;
     margin: 0 70px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 sg--main--header {

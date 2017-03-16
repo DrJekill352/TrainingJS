@@ -39,10 +39,10 @@
             </sg--header--logo>
             <sg--header--nav-bar>
                 <sg--nav-bar>
-                    <sg--nav-bar--item><a href="">Home</a></sg--nav-bar--item>
-                    <sg--nav-bar--item><a href="">Gallery</a></sg--nav-bar--item>
-                    <sg--nav-bar--item><a href="">About</a></sg--nav-bar--item>
-                    <sg--nav-bar--item><a href="">Contact</a></sg--nav-bar--item>
+                    <sg--nav-bar--item><a href="#home">Home</a></sg--nav-bar--item>
+                    <sg--nav-bar--item><a href="#gallery">Gallery</a></sg--nav-bar--item>
+                    <sg--nav-bar--item><a href="#about">About</a></sg--nav-bar--item>
+                    <sg--nav-bar--item><a href="#contact">Contact</a></sg--nav-bar--item>
                     <sg--nav-bar--item><a href="">External</a></sg--nav-bar--item>
                 </sg--nav-bar>
             </sg--header--nav-bar>
@@ -55,7 +55,7 @@
         <sg--content>
             <sg--item-group-1>
                 <sg--item-group-1--item>
-                    <sg--home-item>
+                    <sg--home-item id="home">
                         <sg--home-item--content>
                             <sg--home-item--titel>Bootstrap 4.0 Theme</sg--home-item--titel>
                             <sg--home-item--text>Sigma is free Bootstrap 4 (alpha 2) theme designed for a metro-style
@@ -63,10 +63,10 @@
                             </sg--home-item--text>
                             <sg--home-item--buttons>
                                 <sg--home-item-button class="gallary-button">
-                                    <button onclick="window.scrollBy(0,1000)"> Our Gallary</button>
+                                   <a href="#gallery"><button> Our Gallary</button></a>
                                 </sg--home-item-button>
                                 <sg--home-item-button class="about-button">
-                                    <button onclick="window.scrollBy(0,2000)">Learn More</button>
+                                    <a href="#about"><button>Learn More</button></a>
                                 </sg--home-item-button>
                             </sg--home-item--buttons>
                         </sg--home-item--content>
@@ -116,7 +116,7 @@
             </sg--item-group-4>
             <sg--item-group-3>
                 <sg--item-group-3--item>
-                    <sg--image-card>
+                    <sg--image-card id="gallery">
                         <img src="./image/tm-sigma-01.jpg" alt="mushrooms">
                     </sg--image-card>
                 </sg--item-group-3--item>
@@ -186,7 +186,7 @@
             </sg--item-group-4>
             <sg--item-group-1>
                 <sg--item-group-1--item>
-                    <sg--about-item>
+                    <sg--about-item id="about">
                         <sg--about-item--content>
                             <sg--about-item--titel>About Us</sg--about-item--titel>
                             <sg--about-item--text>Sed elit elit, dictum eu turpis non, fringilla efficitur ipsum.
@@ -236,7 +236,7 @@
                             massa vehicula.
                         </sg--about-card--text>
                         <sg--about-card-button>
-                            <button class="left-column-button" onclick="window.scrollBy(0,-225)"> Read Detail</button>
+                            <a href="#about"><button class="left-column-button"> Read Detail</button></a>
                         </sg--about-card-button>
                     </sg--about-card>
                 </sg--item-group-2--item>
@@ -248,7 +248,7 @@
                             massa vehicula.
                         </sg--about-card--text>
                         <sg--about-card-button>
-                            <button class="right-column-button" onclick="window.scrollBy(0,250)">Learn More</button>
+                            <a href="#contact"><button class="right-column-button">Learn More</button></a>
                         </sg--about-card-button>
                     </sg--about-card>
                 </sg--item-group-2--item>
@@ -293,7 +293,7 @@
             </sg--item-group-4>
             <sg--item-group-1>
                 <sg--item-group-1--item>
-                    <sg--contact-item>
+                    <sg--contact-item id="contact">
                         <sg--contact-item--content>
                             <sg--contact-item--titel>Contact</sg--contact-item--titel>
                             <sg--contact-item--text>You may <a href="https://hubses.github.io/BrainCard/index.html">
