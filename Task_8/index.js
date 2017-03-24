@@ -1,28 +1,14 @@
 (function () {
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         localStorage.clear();
-    } else {
     }
-})();
 
-var checkInStorage = (function () {
     if (localStorage.length > 0) {
-        return true;
-    }
-    else {
-        return false;
-    }
-})();
-
-(function () {
-    if (checkInStorage) {
         try {
             writeInfoForm();
         } catch (error) {
             console.log(error);
         }
-    }
-    else {
     }
 })();
 
@@ -33,16 +19,17 @@ function formObjects() {
     var classNameCheckbox = ".mp--form-checkbox--checkbox";
     this.inWrap = document.querySelector(classNameCheckbox);
 
-    var classNameChoisInput = ".mp--form-choice--text-radio-button";
-    var classNameChoisRadioButton = ".mp--form-choice--radio-button";
+    var classNameFirstChoisRadioButton = "mp--form-choice--first-radio-button";
+    this.firstRadioButton = document.querySelector();
 
-    var classNameFirstChois = ".mp--form-choice--first-field-radio-button";
-    this.firstChoisInput = document.querySelector(classNameFirstChois + " " + classNameChoisInput);
-    this.firstRadioButton = document.querySelector(classNameFirstChois + " " + classNameChoisRadioButton);
+    var classNameFirstChoisInput = "mp--form-choice--first-text-radio-button";
+    this.firstChoisInput = document.querySelector();
 
-    var classNameSecondChois = ".mp--form-choice--second-field-radio-button";
-    this.secondChoisInput = document.querySelector(classNameSecondChois + " " + classNameChoisInput);
-    this.secondRadioButton = document.querySelector(classNameSecondChois + " " + classNameChoisRadioButton);
+    var classNameSecondChoisRadioButton = "mp--form-choice--second-radio-button";
+    this.secondRadioButton = document.querySelector();
+
+    var classNameSecondChoisInput = "mp--form-choice--second-text-radio-button";
+    this.secondChoisInput = document.querySelector();
 
     var classNameChoisType = ".mp--form-choice-type--dropbox";
     this.choisType = document.querySelector(classNameChoisType);
@@ -83,7 +70,7 @@ function writeInfoForm() {
 
     var firstChoisInputValue = localStorage.getItem("firstChoisInputValue");
     var isCheckedFirstRadioButton = false;
-    if(firstChoisInputValue != undefined){
+    if (firstChoisInputValue != undefined) {
         isCheckedFirstRadioButton = true;
         form.firstChoisInput.value = firstChoisInputValue;
         form.firstRadioButton.checked = isCheckedFirstRadioButton;
@@ -91,7 +78,7 @@ function writeInfoForm() {
 
     var secondChoisInputValue = localStorage.getItem("secondChoisInputValue");
     var isCheckedSecondRadioButton = false;
-    if(secondChoisInputValue != undefined){
+    if (secondChoisInputValue != undefined) {
         isCheckedSecondRadioButton = true;
         form.secondChoisInput.value = secondChoisInputValue;
         form.secondRadioButton.checked = isCheckedSecondRadioButton;
@@ -100,7 +87,7 @@ function writeInfoForm() {
     form.label.value = labelValue;
     form.choisType.selectedIndex = choisTypeIndex;
 
-    if(inWrap != "false"){
+    if (inWrap != "false") {
         form.inWrap.checked = true;
     }
 }
