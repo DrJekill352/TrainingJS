@@ -1,0 +1,33 @@
+.mp--form--choice{
+    margin: 10px 0 0 0;
+    width: 496px;
+}
+
+.mp--form-choice--titel{
+    margin: 0 0 2px 0;
+}
+
+.mp--form-choice--field-radio-buttons{
+    padding: 16px 0;
+    border: 1px solid rgb(136, 136, 136);
+}
+
+.mp--form-choice--first-field-radio-button{
+    padding: 5px 0;
+}
+
+.mp--form-choice--second-field-radio-button{
+    padding: 5px 0;
+}
+
+.mp--form-choice--text-radio-button{
+    width: 432px;
+}
+
+.icon-cross{
+    color:rgb(136, 136, 136);
+}
+
+.icon-cross:hover{
+    color: red;
+}

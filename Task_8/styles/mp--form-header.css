@@ -1,0 +1,12 @@
+.mp--form-header--first-path-titel {
+    font-weight: bold;
+}
+
+.mp--form-header--second-path-titel {
+    background-color: rgba(237, 237, 237, 1);
+}
+
+.mp--form-header--text{
+    line-height: 21px;
+    padding: 16px 0;
+}
