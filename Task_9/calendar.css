@@ -1,0 +1,90 @@
+.calendar--month-info{
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 247px;
+    height: 100px;
+    font-size: 30px;
+    text-align: center;
+    background-color: #1E88E5;
+    color: white;
+    margin: 10px 0 0 0;
+}
+
+.calendar--info-row{
+    display: none;
+}
+
+.calendar--input-date{
+    font-size: 18px;
+    width: 243px; 
+}
+.calendar--view-button{
+    width: 247px;
+    height: 30px;
+    font-size: 16px;
+    background-color: #1E88E5;
+    border: none;
+    color: white;
+    margin: 1px 0 0 0;
+}
+
+.calendar{
+    width: 247px;
+}
+
+.icon-next{
+    margin: 5px;
+    font-size: 25px;
+}
+
+.icon-pre{
+    margin: 5px;
+    font-size: 25px;
+}
+
+.calendar--info-row{
+    display: none;
+    flex-direction: row;
+}
+
+.calendar--info-day{
+    width: calc(100%/7);
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    background-color: #ddd;
+    padding: 7px 0;
+}
+
+.calendar--calendar{
+    text-align: center;
+    font-size: 20px;
+    background-color: #eee;
+    color: #444;
+}
+
+
+.calendar--week{
+    display: flex;
+    flex-direction: row;
+}
+
+.calendar--day{
+    text-align: center;
+    width: calc(100%/7);
+}
+
+.calendar--day:hover{
+    background-color: #1E88E5;
+    color: white;
+}
+
+.calendar--current-day{
+    border: 1px solid #1E88E5;
+}
+
+.calendar--empty-sell:hover{
+    background-color: #eee;
+}
