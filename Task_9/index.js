@@ -1,50 +1,11 @@
 this.CLASS_NAME_DAY = "calendar--day";
 this.CLASS_NAME_WEEK = "calendar--week";
-this.CLASS_NAME_CURRENT_DAY = " calendar--current-day";
-this.MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-this.SMALL_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 this.CLASS_NAME_EMPTY_SELL = " calendar--empty-sell";
+this.CLASS_NAME_CURRENT_DAY = " calendar--current-day";
+this.NAME_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+this.SMALL_NAME_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function getArrayDatesMonth(monthCurrentDate) {
-    var numberLastDateCurrentMonth = getCurrentMonthLastDateNumber(monthCurrentDate);
-    var arrayDatesMonth = [];
-
-    var day = 1;
-    for (var index = 0; index < numberLastDateCurrentMonth; index++) {
-        arrayDatesMonth[index] = new Date(monthCurrentDate.getFullYear(), monthCurrentDate.getMonth(), day);
-        day++;
-    }
-
-    return arrayDatesMonth;
-}
-
-function getCurrentMonthLastDateNumber(monthCurrentDate) {
-    var monthNextDate = new Date(monthCurrentDate.getFullYear(), monthCurrentDate.getMonth() + 1);
-    var lastDateCurrentMonth = new Date(monthNextDate.getFullYear(), monthNextDate.getMonth(), 0);
-    var numberLastDateCurrentMonth = lastDateCurrentMonth.getDate();
-
-    return numberLastDateCurrentMonth;
-}
-
-
-function drawCalendar(arrayDatesMonth) {
-    var arrayWeeks = [];
-    arrayWeeks.push(getArrayFirstWeekDates(arrayDatesMonth));
-    while (true) {
-        var lastWeek = arrayWeeks[arrayWeeks.length - 1];
-        var lastdateLastWeek = lastWeek[lastWeek.length - 1];
-        if (lastdateLastWeek == undefined) {
-            break;
-        } else {
-            arrayWeeks.push(getArrayWeekDates(arrayDatesMonth, lastdateLastWeek.getDate()));
-        }
-    }
-    var calendar = document.querySelector(".calendar--calendar");
-
-    for (var index = 0; index < arrayWeeks.length; index++) {
-        calendar.appendChild(getWeekElement(arrayWeeks[index]));
-    }
-}
+/*
 
 function removeChildren() {
     var calendar = document.querySelector(".calendar--calendar");
@@ -55,60 +16,10 @@ function removeChildren() {
     }
 }
 
-function getArrayFirstWeekDates(arrayDatesMonth) {
-    var monthFirstDateDay = arrayDatesMonth[0].getDay();
-    var monthEndFirstWeekDate;
-    for (var index = 0; index < arrayDatesMonth.length; index++) {
-        if (arrayDatesMonth[index].getDay() == 6) {
-            monthEndFirstWeekDate = arrayDatesMonth[index];
-            break;
-        }
-    }
-    var arrayFirstWeekDates = [];
-    var iterator = 0;
-    for (var index = monthFirstDateDay; index < 7; index++) {
-        arrayFirstWeekDates[index] = arrayDatesMonth[iterator];
-        iterator++;
-    }
-    return arrayFirstWeekDates;
-}
 
-function getArrayWeekDates(arrayDatesMonth, startWeekDate) {
-    var arrayWeekDates = [];
-    var currentWeekDate = startWeekDate;
-    var lenghtWeek = 7;
-    for (var index = 0; index < lenghtWeek; index++) {
-        arrayWeekDates[index] = arrayDatesMonth[currentWeekDate];
-        currentWeekDate++;
-    }
-    return arrayWeekDates;
-}
 
 function getWeekElement(arrayDatesWeek) {
-    var arrayDaysElements = [];
-    for (var index = 0; index < arrayDatesWeek.length; index++) {
-        arrayDaysElements[index] = getDayElement(arrayDatesWeek[index]);
-    }
 
-    var week = document.createElement('div');
-    week.className = CLASS_NAME_WEEK;
-    for (var index = 0; index < arrayDaysElements.length; index++) {
-        week.appendChild(getDayElement(arrayDatesWeek[index]));
-    }
-
-    return week;
-}
-
-function getDayElement(dayDate) {
-    var day = document.createElement('div');
-    day.className = CLASS_NAME_DAY;
-    if (dayDate != undefined) {
-        day.innerHTML = dayDate.getDate();
-    } else {
-        day.innerHTML = "";
-        day.className += CLASS_NAME_EMPTY_SELL;
-    }
-    return day;
 }
 
 function viewSelectCalendar() {
@@ -248,4 +159,132 @@ document.querySelector("[name=button]").addEventListener("click", showCalendarIn
 document.querySelector(".calendar--preMonth-button").addEventListener("click", viewPreMonth);
 document.querySelector(".calendar--preMonth-button").addEventListener("click", viewSelectMonthDate);
 document.querySelector(".calendar--nextMonth-button").addEventListener("click", viewNextMonth);
-document.querySelector(".calendar--nextMonth-button").addEventListener("click", viewSelectMonthDate);
+document.querySelector(".calendar--nextMonth-button").addEventListener("click", viewSelectMonthDate);*/
+
+function Calendar() {
+    this.getMonthDates = function (selectMonthDate) {
+        var selectMonthLastDateNumber = getCurrentMonthLastDateNumber(selectMonthDate);
+        var arrayMonthDates = [];
+
+        for (var day = 1; day <= selectMonthLastDateNumber; day++) {
+            monthDay = new Date(monthCurrentDate.getFullYear(), monthCurrentDate.getMonth(), day);
+            arrayMonthDates.push(monthDay);
+        }
+
+        return arrayMonthDates;
+    }
+
+    this.getCurrentDayDate = function () {
+        var currentDayDate = new Date();
+        return currentDayDate;
+    }
+
+    this.setSelectDayDate = function (selectDayDate) {
+        selectDayDateString = "Your select " + selectDayDate.getMonth() + "." + selectDayDate.getDate() + "." + selectDayDate.getFullYear();
+        console.log(selectDayDateString);
+    }
+
+    var getCurrentMonthLastDateNumber = function (selectMonthDate) {
+        var nextMonthDate = new Date(selectMonthDate.getFullYear(), selectMonthDate.getMonth() + 1);
+        var selectMonthLastDate = new Date(nextMonthDate.getFullYear(), nextMonthDate.getMonth(), 0);
+        var selectMonthLastDateNumber = selectMonthLastDate.getDate();
+
+        return selectMonthLastDateNumber;
+    }
+}
+
+function CalendarStrategy() {
+
+    var showInputMonth = function () {
+
+    }
+
+    var getInputMonthDate = function () {
+
+    }
+
+    var showNextInputMonth = function () {
+
+    }
+
+    var showPreInputMonth = function () {
+
+    }
+
+    var drawSelectMonth = function (arraySelectMonthDates) {
+        var arrayWeeks = [];
+        arrayWeeks.push(getArrayFirstWeekDates(arraySelectMonthDates));
+        while (true) {
+            var lastWeek = arrayWeeks[arrayWeeks.length - 1];
+            var lastdateLastWeek = lastWeek[lastWeek.length - 1];
+            if (lastdateLastWeek == undefined) {
+                break;
+            } else {
+                arrayWeeks.push(getArrayWeekDates(arraySelectMonthDates, lastdateLastWeek.getDate()));
+            }
+        }
+        var calendar = document.querySelector(".calendar--calendar");
+
+        for (var index = 0; index < arrayWeeks.length; index++) {
+            calendar.appendChild(getWeekElement(arrayWeeks[index]));
+        }
+    }
+
+    function getFirstWeekDates(monthDates) {
+        var monthFirstDayDate = monthDates[0].getDay();
+        var monthEndFirstWeekDate;
+
+        var arrayFirstWeekDates = [];
+        var iterator = 0;
+        for (var index = monthFirstDayDate; index < 7; index++) {
+            arrayFirstWeekDates[index] = arrayDatesMonth[iterator];
+            iterator++;
+        }
+        return arrayFirstWeekDates;
+    }
+
+    var getFirstWeekLastDayDate = function (monthDates) {
+        var firstWeekLastDayDate = null;
+        for (var index = 0; index < monthDates.length; index++) {
+            if (monthDates[index].getDay() == 6) {
+                weekLastDayDate = monthDates[index];
+                break;
+            }
+        }
+        return weekLastDayDate;
+    }
+
+    function getArrayWeekDates(arrayDatesMonth, startWeekDate) {
+        var arrayWeekDates = [];
+        var currentWeekDate = startWeekDate;
+        var lenghtWeek = 7;
+        for (var index = 0; index < lenghtWeek; index++) {
+            arrayWeekDates[index] = arrayDatesMonth[currentWeekDate];
+            currentWeekDate++;
+        }
+        return arrayWeekDates;
+    }
+
+    var getWeekDomElement = function (weekDays) {
+        var weekDomElement = document.createElement('div');
+        weekDomElement.className = CLASS_NAME_WEEK;
+        for (var index = 0; index < weekDays.length; index++) {
+            var dayDomElement = getDayElement(weekDays[index]);
+            weekDomElement.appendChild(dayDomElement);
+        }
+
+        return weekDomElement;
+    }
+
+    var getDayDomElement = function (dayNumber) {
+        var dayDomElement = document.createElement('div');
+        dayDomElement.className = CLASS_NAME_DAY;
+        if (dayNumber != undefined) {
+            dayDomElement.innerHTML = dayDomElement.getDate();
+        } else {
+            dayDomElement.innerHTML = "";
+            dayDomElement.className += CLASS_NAME_EMPTY_SELL;
+        }
+        return dayDomElement;
+    }
+}
