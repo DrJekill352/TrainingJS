@@ -20,7 +20,11 @@
     padding: 5px 0;
 }
 
-.mp--form-choice--text-radio-button{
+.mp--form-choice--first-text-radio-button{
+    width: 432px;
+}
+
+.mp--form-choice--second-text-radio-button{
     width: 432px;
 }
 

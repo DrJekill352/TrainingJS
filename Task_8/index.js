@@ -13,26 +13,26 @@
 })();
 
 function formObjects() {
-    var classNameLabel = ".mp--form-field-label--input";
-    this.label = document.querySelector(classNameLabel);
+    var nameFieldLabel = "field-label";
+    this.label = document.querySelector("[name=" + nameFieldLabel + "]");
 
-    var classNameCheckbox = ".mp--form-checkbox--checkbox";
-    this.inWrap = document.querySelector(classNameCheckbox);
+    var nameChoisType = "choice-type";
+    this.choisType = document.querySelector("[name=" + nameChoisType + "]");
 
-    var classNameFirstChoisRadioButton = "mp--form-choice--first-radio-button";
-    this.firstRadioButton = document.querySelector();
+    var nameFirstChoisRadioButton = "first-radio-button";
+    this.firstRadioButton = document.querySelector("[name=" + nameFirstChoisRadioButton + "]");
 
-    var classNameFirstChoisInput = "mp--form-choice--first-text-radio-button";
-    this.firstChoisInput = document.querySelector();
+    var nameFirstChoisInput = "first-text-radio-button";
+    this.firstChoisInput = document.querySelector("[name=" + nameFirstChoisInput + "]");
 
-    var classNameSecondChoisRadioButton = "mp--form-choice--second-radio-button";
-    this.secondRadioButton = document.querySelector();
+    var nameSecondChoisRadioButton = "second-radio-button";
+    this.secondRadioButton = document.querySelector("[name=" + nameSecondChoisRadioButton + "]");
 
-    var classNameSecondChoisInput = "mp--form-choice--second-text-radio-button";
-    this.secondChoisInput = document.querySelector();
+    var nameSecondChoisInput = "second-text-radio-button";
+    this.secondChoisInput = document.querySelector("[name=" + nameSecondChoisInput + "]");
 
-    var classNameChoisType = ".mp--form-choice-type--dropbox";
-    this.choisType = document.querySelector(classNameChoisType);
+    var namIsWrapCheckbox = "isWrap-checkbox";
+    this.inWrap = document.querySelector("[name=" + namIsWrapCheckbox + "]");
 }
 
 
