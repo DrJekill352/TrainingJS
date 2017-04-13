@@ -1,0 +1,67 @@
+<div class="search-teacher-book" [ngClass]="{'search-teacher-book_disabled': canSearch}">
+  <input class="search-teacher-book_teacher-name" [(ngModel)]="teacherName" type="text">
+  <button class="search-teacher-book_search-button" (click)="searchTeacherBook()">Search</button>
+</div>
+
+<div class="teacher-book" [ngClass]="{'teacher-book_disabled': !canSearch}">
+  <table class="teacher-book_table">
+    <thead class="teacher-book_header">
+    <tr class="header_row">
+      <th class="row_lesson">
+      </th>
+      <th class="row_lesson" *ngFor="let lesson of vm.lessons; let i = index;"
+          [attr.colspan]=" i+1 === vm.statValuesIndex ? 2 : 1" on-mousedown="setStatValuesIndex(lesson)"
+          on-mouseup="setStatValuesIndex(0)">
+        {{lesson}}
+      </th>
+      <th>
+        <div class="add-btn header_add-btn" (click)="addLesson()">+</div>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody class="teacher-book_body">
+    <tr class="body_student" *ngFor="let student of vm.students">
+      <th class="student_name">
+        {{student.name}}
+        <span class="delete-btn row_delete-btn delete-btn--btn-sm" (click)="deleteStudent(student.name)">X</span>
+      </th>
+      <ng-container *ngFor="let value of student.values; let i = index;">
+        <td class="student_lesson" *ngIf="i + 1 != vm.statValuesIndex; else renderWithStatistic">
+          <span *ngIf="value">{{value}}</span>
+          <span *ngIf="!value">
+                <input class="lesson_input" #valueInput type="text">
+                <span class="add-btn lesson_add-btn" (click)="addValue(student.name,i+1, valueInput.value)">+</span>
+          </span>
+        </td>
+        <ng-template #renderWithStatistic>
+          <td class="student_lesson">
+            <div *ngIf="value">{{value}}</div>
+            <span *ngIf="!value">
+                <input class="lesson_input" #valueInput type="text">
+                <span class="add-btn lesson_add-btn" (click)="addValue(student.name,i+1, valueInput.value)">+</span>
+            </span>
+          </td>
+          <td class="student_lesson student-lesson--color-yellow">
+            <span> {{student.stat}}</span>
+          </td>
+        </ng-template>
+      </ng-container>
+    </tr>
+    <tr>
+      <th>
+        <div class="student-name_input-container">
+          <input placeholder="Write student name" class="input input-container_input" type="text"
+                 [(ngModel)]="newStudentName">
+          <div class="add-btn input-container_add-btn" (click)="canAddStudent && addStudent()"
+               [ngClass]="{'input-container_add-btn--disabled': !canAddStudent}">+
+          </div>
+        </div>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+
+  <button (click)="saveTeacherBook()">Save</button>
+  <button (click)="closeTeacherBook()">Close</button>
+</div>
