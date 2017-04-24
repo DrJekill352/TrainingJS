@@ -2,6 +2,7 @@ export class Cell {
   private _coordinateX: number;
   private _coordinateY: number;
   private _isAlive: boolean = false;
+  private _adjacentCells: Cell[] = [];
 
   constructor(coordinateX: number, coordinateY: number) {
     this._coordinateX = coordinateX;
@@ -22,5 +23,25 @@ export class Cell {
 
   public changeLiveState() {
     this._isAlive = !this._isAlive;
+  }
+
+  public addNewAdjacentCell(adjacentCell: Cell): void {
+    if (this._adjacentCells.length > 6) {
+      throw new Error();//TODO add massege
+    } else {
+      this._adjacentCells.push(adjacentCell);
+    }
+  }
+
+  public addNewAdjacentCells(adjacentCells: Cell[]): void {
+    if (adjacentCells.length > 6) {
+      throw new Error();//TODO add massege
+    } else {
+      this._adjacentCells = adjacentCells;
+    }
+  }
+
+  public  get adjacentCells(): Cell[] {
+    return this._adjacentCells;
   }
 }
