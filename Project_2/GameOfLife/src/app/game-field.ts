@@ -1,5 +1,4 @@
 import {Cell} from './cell'
-import {isUndefined} from "util";
 
 export class GameField {
 
@@ -8,6 +7,13 @@ export class GameField {
   constructor() {
     this.initField();
     this.searchAdjacentCells();
+  }
+  public get cells(): Cell[] {
+    return this._cells;
+  }
+
+  public set cells(cells:Cell[]){
+    this._cells = cells;
   }
 
   private initField() {
@@ -126,17 +132,13 @@ export class GameField {
       sixthAdjacentCell = this._cells.find(c => c.coordinateX === sixthAdjacentCellCoordinateX &&
       c.coordinateY === sixthAdjacentCellCoordinateY);
 
-      this._cells[i].addNewAdjacentCell(firstAdjacentCell);
-      this._cells[i].addNewAdjacentCell(secondAdjacentCell);
-      this._cells[i].addNewAdjacentCell(thirdAdjacentCell);
-      this._cells[i].addNewAdjacentCell(fourthAdjacentCell);
-      this._cells[i].addNewAdjacentCell(fifthAdjacentCell);
-      this._cells[i].addNewAdjacentCell(sixthAdjacentCell);
+      this._cells[i].addAdjacentCell(firstAdjacentCell);
+      this._cells[i].addAdjacentCell(secondAdjacentCell);
+      this._cells[i].addAdjacentCell(thirdAdjacentCell);
+      this._cells[i].addAdjacentCell(fourthAdjacentCell);
+      this._cells[i].addAdjacentCell(fifthAdjacentCell);
+      this._cells[i].addAdjacentCell(sixthAdjacentCell);
     }
-  }
-
-  public get cells(): Cell[] {
-    return this._cells;
   }
 
   public changeCell(coordinateX: number, coordinateY: number): void {
@@ -144,11 +146,7 @@ export class GameField {
     if (selectCell == null) { // TODO
       throw new Error(); //TODO
     } else {
-      selectCell.changeLiveState();
+      selectCell.toggleLiveState();
     }
-  }
-
-  private checkChangeCells(): void {
-
   }
 }

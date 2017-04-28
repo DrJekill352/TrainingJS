@@ -1,27 +1,41 @@
-import {Cell} from './cell'
+import {Cell} from './cell';
+import {GameField} from './game-field';
 
-export class GameManager {
+export class GameOfLife {
+
+  private _field: GameField = new GameField();
+
   constructor() {
   }
 
-  public getModifiedField(cells: Cell[]): Cell[] {
+  public get fieldCells(): Cell[] {
+    return this._field.cells;
+  }
+
+  public checkUpdateField(): void {
+    setInterval(() => {
+      this._field.cells = this.updateCells(this._field.cells);
+    }, 100);
+  }
+
+  private updateCells(cells: Cell[]): Cell[] {
     for (let index = 0; index < cells.length; index++) {
       if (cells[index].isAlive === true) {
-        let isAlive = this.checkAliveCell(cells[index]);
+        let isAlive = this.isDieCell(cells[index]);
         if (isAlive === false) {
-          cells[index].changeLiveState();
+          cells[index].toggleLiveState();
         }
       } else {
-        let isBorn = this.checkDeadCell(cells[index]);
+        let isBorn = this.isBornCell(cells[index]);
         if (isBorn === true) {
-          cells[index].changeLiveState();
+          cells[index].toggleLiveState();
         }
       }
     }
     return cells;
   }
 
-  private checkDeadCell(cell: Cell): boolean {
+  private isBornCell(cell: Cell): boolean {
     let adjacentCells: Cell[] = cell.adjacentCells;
     let countAliveCells: number = 0;
 
@@ -38,7 +52,7 @@ export class GameManager {
     }
   }
 
-  private checkAliveCell(cell: Cell): boolean {
+  private isDieCell(cell: Cell): boolean {
     let adjacentCells: Cell[] = cell.adjacentCells;
     let countAliveCells: number = 0;
 

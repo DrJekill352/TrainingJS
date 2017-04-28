@@ -21,23 +21,15 @@ export class Cell {
     return this._isAlive;
   }
 
-  public changeLiveState() {
+  public toggleLiveState() {
     this._isAlive = !this._isAlive;
   }
 
-  public addNewAdjacentCell(adjacentCell: Cell): void {
-    if (this._adjacentCells.length > 6) {
+  public addAdjacentCell(adjacentCell: Cell): void {
+    if (this._adjacentCells.length >= 6) {
       throw new Error();//TODO add massege
     } else {
       this._adjacentCells.push(adjacentCell);
-    }
-  }
-
-  public addNewAdjacentCells(adjacentCells: Cell[]): void {
-    if (adjacentCells.length > 6) {
-      throw new Error();//TODO add massege
-    } else {
-      this._adjacentCells = adjacentCells;
     }
   }
 
