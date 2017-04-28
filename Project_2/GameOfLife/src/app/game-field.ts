@@ -11,14 +11,14 @@ export class GameField {
   }
 
   private initField() {
-    for (let i = -80; i <= 80; i += 10) {
-      if ((i / 10) % 2 == 0) {
-        for (let j = 0; j <= 360; j += 10) {
+    for (let i = 0; i <= 18; i++) {
+      if (i % 2 == 0) {
+        for (let j = 0; j <= 36; j++) {
           let cell = new Cell(j, i);
           this._cells.push(cell);
         }
       } else {
-        for (let j = 5; j <= 360; j += 10) {
+        for (let j = 0.5; j < 36; j++) {
           let cell = new Cell(j, i);
           this._cells.push(cell);
         }
@@ -27,8 +27,12 @@ export class GameField {
   }
 
   private searchAdjacentCells() {
-    let betweenCellsDistance: number = 10;
-    let betweenCellsHalfDistance: number = 5;
+    const betweenCellsDistance: number = 1;
+    const betweenCellsHalfDistance: number = 0.5;
+    const maxCoordinateX: number = 36;
+    const minCoordinateX: number = 0;
+    const maxCoordinateY: number = 18;
+    const minCoordinateY: number = 0;
 
     for (let i = 0; i < this._cells.length; i++) {
       let coordinateX: number = this._cells[i].coordinateX;
@@ -59,47 +63,47 @@ export class GameField {
       let sixthAdjacentCellCoordinateX = coordinateX - betweenCellsHalfDistance;
       let sixthAdjacentCellCoordinateY = coordinateY + betweenCellsDistance;
 
-      if (coordinateX === 360) {
+      if (coordinateX === maxCoordinateX) {
         fifthAdjacentCellCoordinateX = betweenCellsHalfDistance;
         secondAdjacentCellCoordinateX = betweenCellsHalfDistance;
         thirdAdjacentCellCoordinateX = betweenCellsHalfDistance;
       }
 
-      if (coordinateX === 0) {
-        fourthAdjacentCellCoordinateX = 355;
-        fifthAdjacentCellCoordinateX = 350;
-        sixthAdjacentCellCoordinateX = 355;
+      if (coordinateX === minCoordinateX) {
+        fourthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsHalfDistance;
+        fifthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsDistance;
+        sixthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsHalfDistance;
       }
 
-      if (coordinateY === 80) {
-        firstAdjacentCellCoordinateY = -80;
-        sixthAdjacentCellCoordinateY = -80;
+      if (coordinateY === maxCoordinateY) {
+        firstAdjacentCellCoordinateY = minCoordinateY;
+        sixthAdjacentCellCoordinateY = minCoordinateY;
 
         firstAdjacentCellCoordinateX = coordinateX + betweenCellsDistance;
         sixthAdjacentCellCoordinateX = coordinateX - betweenCellsDistance;
 
-        if (coordinateX === 360) {
-          firstAdjacentCellCoordinateX = 10;
+        if (coordinateX === maxCoordinateX) {
+          firstAdjacentCellCoordinateX = minCoordinateX + betweenCellsDistance;
         }
 
-        if (coordinateX === 0) {
-          sixthAdjacentCellCoordinateX = 350;
+        if (coordinateX === minCoordinateX) {
+          sixthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsDistance;
         }
       }
 
-      if (coordinateY === -80) {
-        thirdAdjacentCellCoordinateY = 80;
-        fourthAdjacentCellCoordinateY = 80;
+      if (coordinateY === minCoordinateY) {
+        thirdAdjacentCellCoordinateY = maxCoordinateY;
+        fourthAdjacentCellCoordinateY = maxCoordinateY;
 
         thirdAdjacentCellCoordinateX = coordinateX + betweenCellsDistance;
         fourthAdjacentCellCoordinateX = coordinateX - betweenCellsDistance;
 
-        if (coordinateX === 360) {
-          thirdAdjacentCellCoordinateX = 10;
+        if (coordinateX === maxCoordinateX) {
+          thirdAdjacentCellCoordinateX = minCoordinateX + betweenCellsDistance;
         }
 
-        if (coordinateX === 0) {
-          fourthAdjacentCellCoordinateX = 350;
+        if (coordinateX === minCoordinateX) {
+          fourthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsDistance;
         }
       }
 
