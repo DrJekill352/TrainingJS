@@ -61,6 +61,7 @@ export class GameOfLife {
       }
     }
 
+
     if (countAliveCells === 3) {
       return true;
     } else {

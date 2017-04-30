@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, Input} from '@angular/core';
 import {AliveCell} from '../alive-cell';
 import * as d3 from "d3";
-import {Observable} from 'rxjs'
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-game-sphere',
@@ -133,7 +133,7 @@ export class GameSphereComponent implements OnInit {
         return true;
       }
     });
-    console.log(selectCellNumber);
+
     let coordinateX: number = 0;
     let ROW_HEX_COUNT: number = 36;
     for (let index = 0; index <= selectCellNumber; index += ROW_HEX_COUNT) {
@@ -151,19 +151,61 @@ export class GameSphereComponent implements OnInit {
     this._selectCellCoordinateY = coordinateY;
   }
 
-  public getSelectCellCoordinate(): Observable<any>{
-    if(this._selectCellCoordinateX || this._selectCellCoordinateY){//TODO add normal chack
+  public aliveCellCoordinate(): Observable<AliveCell[]> {
+    this._svg = d3.select('svg');
+    let svgGElement = this._svg.select('g');
+    let svgPathElements = svgGElement.selectAll('path').nodes();
+    const ROW_HEX_COUNT: number = 36;
 
-    let selectCellCoordinate: any = {
-      x: this._selectCellCoordinateX,
-      y: this._selectCellCoordinateY
-    };
+    let aliveCells: AliveCell[] = [];
 
-    let selectCellCoordinateObservable: Observable<any> = Observable.of(selectCellCoordinate);
-    return selectCellCoordinateObservable;
+    for (let i = 0; i < svgPathElements.length; i++) {
+      if (svgPathElements[i].style.fill === "black") {
+        let coordinateX: number = 0;
+        for (let index = 0; index <= i; index += ROW_HEX_COUNT) {
+          coordinateX++;
+        }
+        let magicNumber: number = coordinateX * ROW_HEX_COUNT;
+        let coordinateY = i - magicNumber + ROW_HEX_COUNT;
+        if (coordinateY < 0) {
+          coordinateY += ROW_HEX_COUNT;
+        }
+        coordinateX--;
+        let aliveCell: AliveCell = new AliveCell(coordinateX, coordinateY);
+        aliveCells.push(aliveCell);
+      }
+    }
 
-    }else{
-      throw new Error(); //TODO add message
+    let aliveCellsObservable: Observable<AliveCell[]> = Observable.of(aliveCells);
+    return aliveCellsObservable;
+  }
+
+  public updateSphereCell(): void {
+    this.clearSphereField();
+    this.drawAliveCells();
+  }
+
+  public clearSphereField(): void {
+    this._svg = d3.select('svg');
+    let svgGElement = this._svg.select('g');
+    let svgPathElements = svgGElement.selectAll('path').nodes();
+
+    for (let i = 0; i < svgPathElements.length; i++) {
+      svgPathElements[i].style.fill = "white";
+    }
+  }
+
+  private drawAliveCells(): void {
+    this._svg = d3.select('svg');
+    let svgGElement = this._svg.select('g');
+    let svgPathElements = svgGElement.selectAll('path').nodes();
+    const ROW_HEX_COUNT: number = 36;
+
+    for (let aliveCell of this._aliveCells) {
+      let numberPathElement = aliveCell.coordinateX * ROW_HEX_COUNT + aliveCell.coordinateY;
+      let pathElement = svgPathElements[numberPathElement];
+
+      pathElement.style.fill = "black";
     }
   }
 }

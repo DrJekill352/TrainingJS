@@ -13,7 +13,7 @@ export class GameField {
     return this._cells;
   }
 
-  public set cells(cells:Cell[]){
+  public set cells(cells: Cell[]) {
     this._cells = cells;
   }
 
@@ -36,8 +36,10 @@ export class GameField {
   private searchAdjacentCells() {
     const betweenCellsDistance: number = 1;
     const betweenCellsHalfDistance: number = 0.5;
-    const maxCoordinateX: number = 36;
-    const minCoordinateX: number = 0;
+    const maxACoordinateX: number = 35;
+    const maxBCoordinateX: number = 35.5;
+    const minACoordinateX: number = 0;
+    const minBCoordinateX: number = 0.5;
     const maxCoordinateY: number = 18;
     const minCoordinateY: number = 0;
 
@@ -70,16 +72,29 @@ export class GameField {
       let sixthAdjacentCellCoordinateX = coordinateX - betweenCellsHalfDistance;
       let sixthAdjacentCellCoordinateY = coordinateY + betweenCellsDistance;
 
-      if (coordinateX === maxCoordinateX) {
-        fifthAdjacentCellCoordinateX = betweenCellsHalfDistance;
-        secondAdjacentCellCoordinateX = betweenCellsHalfDistance;
-        thirdAdjacentCellCoordinateX = betweenCellsHalfDistance;
+      if (coordinateX === maxACoordinateX || coordinateX === maxBCoordinateX) {
+
+        if (coordinateX === maxACoordinateX) {
+          firstAdjacentCellCoordinateX = maxBCoordinateX;
+          secondAdjacentCellCoordinateX = minACoordinateX;
+          thirdAdjacentCellCoordinateX = maxBCoordinateX;
+        } else {
+          firstAdjacentCellCoordinateX = minACoordinateX;
+          secondAdjacentCellCoordinateX = minBCoordinateX;
+          thirdAdjacentCellCoordinateX = minACoordinateX;
+        }
       }
 
-      if (coordinateX === minCoordinateX) {
-        fourthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsHalfDistance;
-        fifthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsDistance;
-        sixthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsHalfDistance;
+      if (coordinateX === minACoordinateX || coordinateX === minBCoordinateX) {
+        if (coordinateX === minACoordinateX) {
+          fourthAdjacentCellCoordinateX = maxBCoordinateX;
+          fifthAdjacentCellCoordinateX = maxACoordinateX;
+          sixthAdjacentCellCoordinateX = maxBCoordinateX;
+        } else {
+          fourthAdjacentCellCoordinateX = minACoordinateX;
+          fifthAdjacentCellCoordinateX = maxBCoordinateX;
+          sixthAdjacentCellCoordinateX = minACoordinateX;
+        }
       }
 
       if (coordinateY === maxCoordinateY) {
@@ -89,12 +104,12 @@ export class GameField {
         firstAdjacentCellCoordinateX = coordinateX + betweenCellsDistance;
         sixthAdjacentCellCoordinateX = coordinateX - betweenCellsDistance;
 
-        if (coordinateX === maxCoordinateX) {
-          firstAdjacentCellCoordinateX = minCoordinateX + betweenCellsDistance;
+        if (coordinateX === maxACoordinateX) {
+          firstAdjacentCellCoordinateX = minACoordinateX + betweenCellsDistance;
         }
 
-        if (coordinateX === minCoordinateX) {
-          sixthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsDistance;
+        if (coordinateX === minACoordinateX) {
+          sixthAdjacentCellCoordinateX = maxACoordinateX - betweenCellsDistance;
         }
       }
 
@@ -105,12 +120,12 @@ export class GameField {
         thirdAdjacentCellCoordinateX = coordinateX + betweenCellsDistance;
         fourthAdjacentCellCoordinateX = coordinateX - betweenCellsDistance;
 
-        if (coordinateX === maxCoordinateX) {
-          thirdAdjacentCellCoordinateX = minCoordinateX + betweenCellsDistance;
+        if (coordinateX === maxACoordinateX) {
+          thirdAdjacentCellCoordinateX = minACoordinateX + betweenCellsDistance;
         }
 
-        if (coordinateX === minCoordinateX) {
-          fourthAdjacentCellCoordinateX = maxCoordinateX - betweenCellsDistance;
+        if (coordinateX === minACoordinateX) {
+          fourthAdjacentCellCoordinateX = maxACoordinateX - betweenCellsDistance;
         }
       }
 
