@@ -1,38 +1,54 @@
 import {Cell} from './cell';
 import {GameField} from './game-field';
+import {AliveCell} from './alive-cell';
+import {Observable} from 'rxjs';
 
 export class GameOfLife {
-
   private _field: GameField = new GameField();
+  private _cells: Cell[] = this._field.cells;
 
   constructor() {
   }
 
-  public get fieldCells(): Cell[] {
-    return this._field.cells;
+  public get aliveCellsObservable(): Observable<AliveCell[]> {
+    let aliveCells: AliveCell[] = [];
+
+    for (let cell of this._cells) {
+      if (cell.isAlive) {
+        let aliveCell: AliveCell = new AliveCell(cell.coordinateX, cell.coordinateY);
+        aliveCells.push(aliveCell);
+      }
+    }
+
+    let aliveCellsObservable: Observable<AliveCell[]> = Observable.of(aliveCells);
+    return aliveCellsObservable;
   }
 
   public checkUpdateField(): void {
     setInterval(() => {
-      this._field.cells = this.updateCells(this._field.cells);
+      this.updateCells();
     }, 100);
   }
 
-  private updateCells(cells: Cell[]): Cell[] {
-    for (let index = 0; index < cells.length; index++) {
-      if (cells[index].isAlive === true) {
-        let isAlive = this.isDieCell(cells[index]);
+  public updateCells(): void {
+    for (let index = 0; index < this._cells.length; index++) {
+      if (this._cells[index].isAlive === true) {
+        let isAlive = this.isDieCell(this._cells[index]);
         if (isAlive === false) {
-          cells[index].toggleLiveState();
+          this._cells[index].toggleLiveState();
         }
       } else {
-        let isBorn = this.isBornCell(cells[index]);
+        let isBorn = this.isBornCell(this._cells[index]);
         if (isBorn === true) {
-          cells[index].toggleLiveState();
+          this._cells[index].toggleLiveState();
         }
       }
     }
-    return cells;
+  }
+
+  public toggleCellLiveState(coordinateX: number, coordinateY: number): void {
+    let cell: Cell = this._cells.find(c => c.coordinateX === coordinateX && c.coordinateY === coordinateY);
+    cell.toggleLiveState();
   }
 
   private isBornCell(cell: Cell): boolean {

@@ -37,3 +37,4 @@ export class Cell {
     return this._adjacentCells;
   }
 }
+

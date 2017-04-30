@@ -8,6 +8,7 @@ export class GameField {
     this.initField();
     this.searchAdjacentCells();
   }
+
   public get cells(): Cell[] {
     return this._cells;
   }
@@ -19,7 +20,7 @@ export class GameField {
   private initField() {
     for (let i = 0; i <= 18; i++) {
       if (i % 2 == 0) {
-        for (let j = 0; j <= 36; j++) {
+        for (let j = 0; j < 36; j++) {
           let cell = new Cell(j, i);
           this._cells.push(cell);
         }
@@ -141,10 +142,10 @@ export class GameField {
     }
   }
 
-  public changeCell(coordinateX: number, coordinateY: number): void {
+  public toggleCellLiveState(coordinateX: number, coordinateY: number): void {
     let selectCell: Cell = this._cells.find(c => c.coordinateX === coordinateX && c.coordinateY === coordinateY);
-    if (selectCell == null) { // TODO
-      throw new Error(); //TODO
+    if (selectCell == undefined) {
+      throw new Error(); //TODO придумать текст ошибки
     } else {
       selectCell.toggleLiveState();
     }
