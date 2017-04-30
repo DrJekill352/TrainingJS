@@ -46,17 +46,6 @@ export class TeacherBookComponent implements OnInit {
     return newVM;
   }
 
-  // constructor(private _teacherBookBox: TeacherBookService) {
-  //
-  //
-  //   if (this._teacherBookBox.isEmpty) {
-  //     this._teacherBook = new TeacherBook();
-  //   } else {
-  //     this._teacherBook = this._teacherBookBox.getTeacherBook();
-  //   }
-  //
-    // }
-
   constructor(private _headTeacher: HeadTeacher) {
     this._teacherAssistant = new TeacherAssistant();
     this._vm = {statValuesIndex: 0};
