@@ -1,0 +1,15 @@
+.app-sphere{
+  width: 960px;
+  height: 600px;
+}
+
+.app-sphere--sphere {
+  stroke: #444;
+  fill: white;
+  stroke-width: 2;
+}
+
+.polygons {
+  stroke: #444;
+  fill: white;
+}
