@@ -5,7 +5,6 @@ import {Observable, Subject} from 'rxjs';
 
 export class GameOfLife {
   private _field: GameField = new GameField();
-  private _cells: Cell[] = this._field.cells;
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
 
   constructor() {
@@ -15,38 +14,40 @@ export class GameOfLife {
     return this._aliveCellsSubject;
   }
 
-private updateAliveCells():void{
-  let aliveCells: AliveCell[] = [];
+  private updateAliveCells(cells: Cell[]): void {
+    let aliveCells: AliveCell[] = [];
 
-  for (let cell of this._cells) {
-    if (cell.isAlive) {
-      let aliveCell: AliveCell = new AliveCell(cell.coordinateX, cell.coordinateY);
-      aliveCells.push(aliveCell);
+    for (let cell of cells) {
+      if (cell.isAlive) {
+        let aliveCell: AliveCell = new AliveCell(cell.coordinateX, cell.coordinateY);
+        aliveCells.push(aliveCell);
+      }
     }
+    debugger;
+    this._aliveCellsSubject.next(aliveCells);
   }
 
-  this._aliveCellsSubject.next(aliveCells);
-}
-
   public updateCells(): void {
-    for (let index = 0; index < this._cells.length; index++) {
-      if (this._cells[index].isAlive === true) {
-        let isAlive = this.isDieCell(this._cells[index]);
+    debugger;
+    let cell: Cell[] = this._field.cells;
+    for (let index = 0; index < cell.length; index++) {
+      if (cell[index].isAlive === true) {
+        let isAlive = this.isDieCell(cell[index]);
         if (isAlive === false) {
-          this._cells[index].toggleLiveState();
+          cell[index].toggleLiveState();
         }
       } else {
-        let isBorn = this.isBornCell(this._cells[index]);
+        let isBorn = this.isBornCell(cell[index]);
         if (isBorn === true) {
-          this._cells[index].toggleLiveState();
+          cell[index].toggleLiveState();
         }
       }
     }
-    this.updateAliveCells();
+    this.updateAliveCells(cell);
   }
 
   public toggleCellLiveState(coordinateX: number, coordinateY: number): void {
-    let cell: Cell = this._cells.find(c => c.coordinateX === coordinateX && c.coordinateY === coordinateY);
+    let cell: Cell = this._field.cells.find(c => c.coordinateX === coordinateX && c.coordinateY === coordinateY);
     cell.toggleLiveState();
   }
 
@@ -61,7 +62,7 @@ private updateAliveCells():void{
     }
 
 
-    if (countAliveCells === 3) {
+    if (countAliveCells === 2) {
       return true;
     } else {
       return false;
@@ -78,7 +79,7 @@ private updateAliveCells():void{
       }
     }
 
-    if (countAliveCells < 2 && countAliveCells > 3) {
+    if (countAliveCells !== 2) {
       return false;
     } else {
       return true;
