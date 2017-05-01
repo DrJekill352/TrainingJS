@@ -18,23 +18,20 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
     this._gameOfLife.aliveCellsObservable.subscribe(aliveCells => {
       this._aliveCells = aliveCells;
     });
 
-    this._gameSphere.aliveCellCoordinate().subscribe((newAliveCells) => {
+    this._gameSphere.aliveCell.subscribe((newAliveCells) => {
       this._newAliveCells = newAliveCells;
     });
   }
 
   public gameStep() {
-    console.log(this._aliveCells);
-    console.log(this._newAliveCells);
-
+    this._gameSphere.updateSphereCell();
     this.updateCellsUpdateStatus();
     this._gameOfLife.updateCells();
-    this._gameSphere.updateSphereCell();
+    this._gameSphere.drawAliveCells(this._aliveCells);
   }
 
   public get aliveCells(): AliveCell[] {
@@ -42,17 +39,18 @@ export class AppComponent implements OnInit {
   }
 
   private updateCellsUpdateStatus(): void {
-    let bornCells: AliveCell[] = this._newAliveCells.fill(x => {
+    let bornCells: AliveCell[] = this._newAliveCells.filter(x => {
       let bornCell = this._aliveCells.find(cell => cell.coordinateX == x.coordinateX &&
       cell.coordinateY == x.coordinateY);
-      if (bornCell !== undefined) {
+      if (bornCell === undefined) {
         return true;
       }
     });
-    for (let bornCell of bornCells) {
-      this._gameOfLife.toggleCellLiveState(bornCell.coordinateX, bornCell.coordinateY);
+    if (bornCells) {
+      for (let bornCell of bornCells) {
+        this._gameOfLife.toggleCellLiveState(bornCell.coordinateX, bornCell.coordinateY);
+      }
     }
-
     let deadCells: AliveCell[] = this._aliveCells.filter(x => {
       let deadCell: AliveCell = this._newAliveCells.find(cell => {
         cell.coordinateX == x.coordinateX && cell.coordinateY == x.coordinateY

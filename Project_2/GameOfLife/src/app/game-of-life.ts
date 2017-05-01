@@ -1,34 +1,32 @@
 import {Cell} from './cell';
 import {GameField} from './game-field';
 import {AliveCell} from './alive-cell';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 export class GameOfLife {
   private _field: GameField = new GameField();
   private _cells: Cell[] = this._field.cells;
+  private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
 
   constructor() {
   }
 
   public get aliveCellsObservable(): Observable<AliveCell[]> {
-    let aliveCells: AliveCell[] = [];
+    return this._aliveCellsSubject;
+  }
 
-    for (let cell of this._cells) {
-      if (cell.isAlive) {
-        let aliveCell: AliveCell = new AliveCell(cell.coordinateX, cell.coordinateY);
-        aliveCells.push(aliveCell);
-      }
+private updateAliveCells():void{
+  let aliveCells: AliveCell[] = [];
+
+  for (let cell of this._cells) {
+    if (cell.isAlive) {
+      let aliveCell: AliveCell = new AliveCell(cell.coordinateX, cell.coordinateY);
+      aliveCells.push(aliveCell);
     }
-
-    let aliveCellsObservable: Observable<AliveCell[]> = Observable.of(aliveCells);
-    return aliveCellsObservable;
   }
 
-  public checkUpdateField(): void {
-    setInterval(() => {
-      this.updateCells();
-    }, 100);
-  }
+  this._aliveCellsSubject.next(aliveCells);
+}
 
   public updateCells(): void {
     for (let index = 0; index < this._cells.length; index++) {
@@ -44,6 +42,7 @@ export class GameOfLife {
         }
       }
     }
+    this.updateAliveCells();
   }
 
   public toggleCellLiveState(coordinateX: number, coordinateY: number): void {

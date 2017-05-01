@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewEncapsulation, Input} from '@angular/core';
 import {AliveCell} from '../alive-cell';
+import {GameOfLife} from '../game-of-life';
 import * as d3 from "d3";
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-game-sphere',
@@ -12,14 +13,13 @@ import {Observable} from 'rxjs';
 })
 export class GameSphereComponent implements OnInit {
 
-  @Input('aliveCells') _aliveCells: AliveCell[];
-
   private _projection: any = d3.geoOrthographic();
   private _path: any = d3.geoPath().projection(this._projection);
   private _svg: any;
-
+  private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
   private _selectCellCoordinateX: number;
   private _selectCellCoordinateY: number;
+  private _aliveCells: AliveCell[] = [];
 
   constructor() {
     this.drawSphere();
@@ -134,24 +134,32 @@ export class GameSphereComponent implements OnInit {
       }
     });
 
-    let coordinateX: number = 0;
+    let coordinateY: number = 0;
     let ROW_HEX_COUNT: number = 36;
     for (let index = 0; index <= selectCellNumber; index += ROW_HEX_COUNT) {
-      coordinateX++;
+      coordinateY++;
     }
 
-    let magicNumber: number = coordinateX * ROW_HEX_COUNT;
-    let coordinateY = selectCellNumber - magicNumber + ROW_HEX_COUNT;
-    if (coordinateY < 0) {
-      coordinateY += ROW_HEX_COUNT;
+    let magicNumber: number = coordinateY * ROW_HEX_COUNT;
+    let coordinateX = selectCellNumber - magicNumber + ROW_HEX_COUNT;
+    if (coordinateX < 0) {
+      coordinateX += ROW_HEX_COUNT;
     }
-    coordinateX--;
+    coordinateY--;
 
-    this._selectCellCoordinateX = coordinateX;
-    this._selectCellCoordinateY = coordinateY;
+    if (coordinateY % 2 == 1) {
+      coordinateX += 0.5;
+    }
+
+    this._selectCellCoordinateX = coordinateY;
+    this._selectCellCoordinateY = coordinateX;
   }
 
-  public aliveCellCoordinate(): Observable<AliveCell[]> {
+  public get aliveCell(): Observable<AliveCell[]> {
+    return this._aliveCellsSubject;
+  }
+
+  private updateAliveCell(): void {
     this._svg = d3.select('svg');
     let svgGElement = this._svg.select('g');
     let svgPathElements = svgGElement.selectAll('path').nodes();
@@ -161,28 +169,30 @@ export class GameSphereComponent implements OnInit {
 
     for (let i = 0; i < svgPathElements.length; i++) {
       if (svgPathElements[i].style.fill === "black") {
-        let coordinateX: number = 0;
+        let coordinateY: number = 0;
         for (let index = 0; index <= i; index += ROW_HEX_COUNT) {
-          coordinateX++;
+          coordinateY++;
         }
-        let magicNumber: number = coordinateX * ROW_HEX_COUNT;
-        let coordinateY = i - magicNumber + ROW_HEX_COUNT;
-        if (coordinateY < 0) {
-          coordinateY += ROW_HEX_COUNT;
+        let magicNumber: number = coordinateY * ROW_HEX_COUNT;
+        let coordinateX = i - magicNumber + ROW_HEX_COUNT;
+        if (coordinateX < 0) {
+          coordinateX += ROW_HEX_COUNT;
         }
-        coordinateX--;
+        coordinateY--;
+
+        if (coordinateY % 2 == 1) {
+          coordinateX += 0.5;
+        }
         let aliveCell: AliveCell = new AliveCell(coordinateX, coordinateY);
         aliveCells.push(aliveCell);
       }
     }
-
-    let aliveCellsObservable: Observable<AliveCell[]> = Observable.of(aliveCells);
-    return aliveCellsObservable;
+    this._aliveCellsSubject.next(aliveCells);
   }
 
   public updateSphereCell(): void {
+    this.updateAliveCell();
     this.clearSphereField();
-    this.drawAliveCells();
   }
 
   public clearSphereField(): void {
@@ -195,14 +205,14 @@ export class GameSphereComponent implements OnInit {
     }
   }
 
-  private drawAliveCells(): void {
+  public drawAliveCells(aliveCells: AliveCell[]): void {
     this._svg = d3.select('svg');
     let svgGElement = this._svg.select('g');
     let svgPathElements = svgGElement.selectAll('path').nodes();
     const ROW_HEX_COUNT: number = 36;
-
-    for (let aliveCell of this._aliveCells) {
-      let numberPathElement = aliveCell.coordinateX * ROW_HEX_COUNT + aliveCell.coordinateY;
+console.log(aliveCells);
+    for (let aliveCell of aliveCells) {
+      let numberPathElement = aliveCell.coordinateY * ROW_HEX_COUNT + Math.floor(aliveCell.coordinateX);
       let pathElement = svgPathElements[numberPathElement];
 
       pathElement.style.fill = "black";
