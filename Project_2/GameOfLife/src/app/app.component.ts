@@ -29,24 +29,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public gameStep() {
-    this._gameSphere.updateSphereCell();
-    this.updateCellsUpdateStatus();
-    this._gameOfLife.updateCells();
-    this._gameSphere.drawAliveCells(this._aliveCells);
-    console.log("ok")
-  }
-
-  public gameRun() {
-    d3.interval((elapsed) => {
-      this.gameStep();
-    },1000);
-  }
-
-  public get aliveCells(): AliveCell[] {
-    return this._aliveCells;
-  }
-
   private updateCellsUpdateStatus(): void {
 
     let bornCells: AliveCell[] = this._newAliveCells.filter(x => {
@@ -78,4 +60,23 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
+  public gameStep() {
+    this._gameSphere.updateSphereCell();
+    this.updateCellsUpdateStatus();
+    this._gameOfLife.updateCells();
+    this._gameSphere.drawAliveCells(this._aliveCells);
+    console.log("ok")
+  }
+
+  public gameRun() {
+    d3.interval((elapsed) => {
+      this.gameStep();
+    }, 1000);
+  }
+
+  public get aliveCells(): AliveCell[] {
+    return this._aliveCells;
+  }
+
 }

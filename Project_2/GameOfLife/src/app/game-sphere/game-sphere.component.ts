@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, Input} from '@angular/core';
+import {Component, ViewEncapsulation, Input} from '@angular/core';
 import {AliveCell} from '../alive-cell';
 
 import * as d3 from "d3";
@@ -11,7 +11,7 @@ import {Observable, Subject} from 'rxjs';
   encapsulation: ViewEncapsulation.None
 
 })
-export class GameSphereComponent implements OnInit {
+export class GameSphereComponent {
 
   private _projection: any = d3.geoOrthographic();
   private _path: any = d3.geoPath().projection(this._projection);
@@ -22,7 +22,6 @@ export class GameSphereComponent implements OnInit {
 
   constructor() {
     this.drawSphere();
-     // this.moveSphere();
   }
 
   ngOnInit() {
@@ -104,14 +103,6 @@ export class GameSphereComponent implements OnInit {
     return points;
   }
 
-  public moveSphere(): void {
-    d3.interval((elapsed) => {
-      this._projection.rotate([elapsed / 150, 0]);
-      this._svg.selectAll('path')
-        .attr('d', this._path);
-    }, 50);
-  }
-
   private onSelectCell(event) {
     let cell = event.target;
     let poligons = document.querySelector(".polygons");
@@ -152,10 +143,6 @@ export class GameSphereComponent implements OnInit {
 
   }
 
-  public get aliveCell(): Observable<AliveCell[]> {
-    return this._aliveCellsSubject;
-  }
-
   private updateAliveCell(): void {
     this._svg = d3.select('svg');
     let svgGElement = this._svg.select('g');
@@ -187,6 +174,18 @@ export class GameSphereComponent implements OnInit {
       }
     }
     this._aliveCellsSubject.next(aliveCells);
+  }
+
+  public moveSphere(): void {
+    d3.interval((elapsed) => {
+      this._projection.rotate([elapsed / 150, 0]);
+      this._svg.selectAll('path')
+        .attr('d', this._path);
+    }, 50);
+  }
+
+  public get aliveCell(): Observable<AliveCell[]> {
+    return this._aliveCellsSubject;
   }
 
   public updateSphereCell(): void {
