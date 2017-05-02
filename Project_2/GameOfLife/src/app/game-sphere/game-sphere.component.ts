@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation, Input} from '@angular/core';
 import {AliveCell} from '../alive-cell';
-import {GameOfLife} from '../game-of-life';
+
 import * as d3 from "d3";
 import {Observable, Subject} from 'rxjs';
 
@@ -17,13 +17,12 @@ export class GameSphereComponent implements OnInit {
   private _path: any = d3.geoPath().projection(this._projection);
   private _svg: any;
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
-  private _selectCellCoordinateX: number;
-  private _selectCellCoordinateY: number;
+
   private _aliveCells: AliveCell[] = [];
 
   constructor() {
     this.drawSphere();
-    // this.moveSphere();
+     // this.moveSphere();
   }
 
   ngOnInit() {
@@ -110,7 +109,7 @@ export class GameSphereComponent implements OnInit {
       this._projection.rotate([elapsed / 150, 0]);
       this._svg.selectAll('path')
         .attr('d', this._path);
-    }, 20);
+    }, 50);
   }
 
   private onSelectCell(event) {
@@ -151,8 +150,6 @@ export class GameSphereComponent implements OnInit {
       coordinateX += 0.5;
     }
 
-    this._selectCellCoordinateX = coordinateY;
-    this._selectCellCoordinateY = coordinateX;
   }
 
   public get aliveCell(): Observable<AliveCell[]> {
@@ -183,6 +180,8 @@ export class GameSphereComponent implements OnInit {
         if (coordinateY % 2 == 1) {
           coordinateX += 0.5;
         }
+        if (coordinateX == 0.5 && coordinateY == 5 || coordinateX == 35.5 && coordinateY == 5) {
+        }
         let aliveCell: AliveCell = new AliveCell(coordinateX, coordinateY);
         aliveCells.push(aliveCell);
       }
@@ -210,7 +209,6 @@ export class GameSphereComponent implements OnInit {
     let svgGElement = this._svg.select('g');
     let svgPathElements = svgGElement.selectAll('path').nodes();
     const ROW_HEX_COUNT: number = 36;
-console.log(aliveCells);
     for (let aliveCell of aliveCells) {
       let numberPathElement = aliveCell.coordinateY * ROW_HEX_COUNT + Math.floor(aliveCell.coordinateX);
       let pathElement = svgPathElements[numberPathElement];

@@ -23,30 +23,40 @@ export class GameOfLife {
         aliveCells.push(aliveCell);
       }
     }
-    debugger;
     this._aliveCellsSubject.next(aliveCells);
   }
 
   public updateCells(): void {
-    debugger;
-    let cell: Cell[] = this._field.cells;
-    for (let index = 0; index < cell.length; index++) {
-      if (cell[index].isAlive === true) {
-        let isAlive = this.isDieCell(cell[index]);
-        if (isAlive === false) {
-          cell[index].toggleLiveState();
+    let cells: Cell[] = this._field.cells;
+    let updateCellsNumber: number[] = [];
+    for (let index = 0; index < cells.length; index++) {
+
+      if (cells[index].coordinateX == 0.5 && cells[index].coordinateY == 5 || cells[index].coordinateX == 35.5 && cells[index].coordinateY == 5) {
+      }
+      if (cells[index].isAlive === false) {
+        let isBorn = this.isBornCell(cells[index]);
+        if (isBorn === true) {
+          updateCellsNumber.push(index);
         }
       } else {
-        let isBorn = this.isBornCell(cell[index]);
-        if (isBorn === true) {
-          cell[index].toggleLiveState();
+        let isDie = this.isDieCell(cells[index]);
+        if (isDie === true) {
+          updateCellsNumber.push(index);
         }
       }
     }
-    this.updateAliveCells(cell);
+
+    for (let index = 0; index < updateCellsNumber.length; index++) {
+      cells[updateCellsNumber[index]].toggleLiveState();
+    }
+
+    this._field.cells = cells;
+    this.updateAliveCells(cells);
   }
 
   public toggleCellLiveState(coordinateX: number, coordinateY: number): void {
+    if(coordinateX == 0 && coordinateY == 5 ||coordinateX == 35.5 && coordinateY == 5){
+    }
     let cell: Cell = this._field.cells.find(c => c.coordinateX === coordinateX && c.coordinateY === coordinateY);
     cell.toggleLiveState();
   }
@@ -62,7 +72,7 @@ export class GameOfLife {
     }
 
 
-    if (countAliveCells === 2) {
+    if (countAliveCells === 3) {
       return true;
     } else {
       return false;
@@ -79,7 +89,7 @@ export class GameOfLife {
       }
     }
 
-    if (countAliveCells !== 2) {
+    if (countAliveCells !== 3) {
       return false;
     } else {
       return true;
