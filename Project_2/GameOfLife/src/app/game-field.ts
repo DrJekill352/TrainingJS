@@ -9,14 +9,6 @@ export class GameField {
     this.searchAdjacentCells();
   }
 
-  public get cells(): Cell[] {
-    return this._cells;
-  }
-
-  public set cells(cells: Cell[]) {
-    this._cells = cells;
-  }
-
   private initField() {
     for (let i = 0; i <= 18; i++) {
       if (i % 2 == 0) {
@@ -157,10 +149,18 @@ export class GameField {
     }
   }
 
+  public get cells(): Cell[] {
+    return this._cells;
+  }
+
+  public set cells(cells: Cell[]) {
+    this._cells = cells;
+  }
+
   public toggleCellLiveState(coordinateX: number, coordinateY: number): void {
     let selectCell: Cell = this._cells.find(c => c.coordinateX === coordinateX && c.coordinateY === coordinateY);
     if (selectCell == undefined) {
-      throw new Error(); //TODO придумать текст ошибки
+      throw new Error("Value not find");
     } else {
       selectCell.toggleLiveState();
     }

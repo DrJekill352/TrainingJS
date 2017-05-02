@@ -27,13 +27,13 @@ export class Cell {
 
   public addAdjacentCell(adjacentCell: Cell): void {
     if (this._adjacentCells.length >= 6) {
-      throw new Error();//TODO add massege
+      throw new Error("Value index out of range exeption");
     } else {
       this._adjacentCells.push(adjacentCell);
     }
   }
 
-  public  get adjacentCells(): Cell[] {
+  public get adjacentCells(): Cell[] {
     return this._adjacentCells;
   }
 }
