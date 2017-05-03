@@ -8,6 +8,7 @@ import * as d3 from "d3";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
   private _gameOfLife: GameOfLife = new GameOfLife();
@@ -15,6 +16,8 @@ export class AppComponent implements OnInit {
 
   private _newAliveCells: any = null;
   private _aliveCells: AliveCell[] = [];
+
+  private _isWork: boolean = false;
 
   constructor() {
   }
@@ -66,17 +69,26 @@ export class AppComponent implements OnInit {
     this.updateCellsUpdateStatus();
     this._gameOfLife.updateCells();
     this._gameSphere.drawAliveCells(this._aliveCells);
-    console.log("ok")
   }
 
   public gameRun() {
-    d3.interval((elapsed) => {
+    this._isWork = true;
+    this._gameSphere.isWork = true;
+    this._gameSphere.moveSphere();
+    let work = d3.interval((elapsed) => {
+      if(this._isWork == false){
+        work.stop();
+      }
       this.gameStep();
     }, 1000);
+  }
+
+  public gameStop() {
+    this._isWork = false;
+    this._gameSphere.isWork = false;
   }
 
   public get aliveCells(): AliveCell[] {
     return this._aliveCells;
   }
-
 }

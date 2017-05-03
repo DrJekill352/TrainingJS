@@ -19,6 +19,7 @@ export class GameSphereComponent {
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
 
   private _aliveCells: AliveCell[] = [];
+  private _isWork: boolean = false;
 
   constructor() {
     this.drawSphere();
@@ -177,7 +178,10 @@ export class GameSphereComponent {
   }
 
   public moveSphere(): void {
-    d3.interval((elapsed) => {
+    let work = d3.interval((elapsed) => {
+      if (this._isWork == false) {
+        work.stop();
+      }
       this._projection.rotate([elapsed / 150, 0]);
       this._svg.selectAll('path')
         .attr('d', this._path);
@@ -214,5 +218,9 @@ export class GameSphereComponent {
 
       pathElement.style.fill = "black";
     }
+  }
+
+  public set isWork(isWork: boolean) {
+    this._isWork = isWork;
   }
 }
