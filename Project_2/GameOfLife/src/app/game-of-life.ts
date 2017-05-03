@@ -50,7 +50,7 @@ export class GameOfLife {
       }
     }
 
-    if (countAliveCells !== 2) {
+    if (countAliveCells === 2) {
       return false;
     } else {
       return true;
