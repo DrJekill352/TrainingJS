@@ -1,17 +1,57 @@
-app-component{
+.app-component-content {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
-.app-component--sphere{
-  width: 70%;
+
+.app-component--header {
+  height: 70px;
+  line-height: 70px;
+  font-size: 30px;
+  background-color: #02796B;
+  color: white;
+  margin: 0 0 10px 0;
+  padding: 0 0 0 10px;
 }
-.app-component--game-buttons{
+
+.app-component--sphere {
+  width: 90%;
+}
+
+.app-component--game-buttons {
   display: flex;
   flex-direction: column;
 }
 
-.app-component--game-buttons button{
-  font-size: 16px;
-  width: 50px;
-  margin: 5px 0 5px 0;
+.game-buttons--game-step-button {
+  font-size: 20px;
+  text-align: center;
+  width: 120px;
+  margin: 5px 5px 5px 5px;
+  background-color: #02796B;;
+  color: white;
+  border-radius: 7px;
+  line-height: 30px;
+}
+
+.game-buttons--game-run-button {
+  font-size: 20px;
+  text-align: center;
+  width: 120px;
+  margin: 5px 5px 5px 5px;
+  background-color: #02796B;
+  color: white;
+  border-radius: 7px;
+  line-height: 30px;
+}
+
+.game-buttons--game-stop-button {
+  font-size: 20px;
+  text-align: center;
+  width: 120px;
+  margin: 5px 5px 5px 5px;
+  background-color: #02796B;
+  color: white;
+  border-radius: 7px;
+  line-height: 30px;
 }

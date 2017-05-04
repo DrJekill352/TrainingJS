@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
     this._gameSphere.aliveCell.subscribe((newAliveCells) => {
       this._nextGenerationAliveCells = newAliveCells;
     });
-    this.gameStep();
   }
 
 
@@ -55,15 +54,4 @@ export class AppComponent implements OnInit {
     this._isRun = false;
   }
 
-  public runMoveSphere(): void {
-    this._gameSphere.runMoveSphere();
-  }
-
-  public stopMoveSphere(): void {
-    this._gameSphere.stopMoveSphere();
-  }
-
-  public reverseMoveSphere(): void {
-    this._gameSphere.reverseMoveSphere();
-  }
 }

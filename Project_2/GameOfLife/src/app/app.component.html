@@ -1,18 +1,19 @@
-<div class="app-component--sphere">
-  <game-sphere></game-sphere>
+<div class="app-component--header">Game Of Life</div>
+<div class="app-component-content">
+  <div class="app-component--sphere">
+    <game-sphere></game-sphere>
+  </div>
+  <div class="app-component--game-buttons">
+    <div class="game-buttons">
+      <div class="game-buttons--game-step-button-wrapper">
+        <button class="game-buttons--game-step-button" (click)="gameStep()">Step</button>
+      </div>
+      <div class="game-buttons--game-run-button-wrapper">
+        <button class="game-buttons--game-run-button" (click)="gameRun()">Run</button>
+      </div>
+      <div class="game-buttons--game-stop-button-wrapper">
+        <button class="game-buttons--game-stop-button" (click)="gameStop()">Stop</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="app-component--game-buttons">
-  <div class="app-game-buttons--game-step">
-    <button (click)="gameStep()">Step</button>
-  </div>
-  <div class="app-game-buttons--game-run">
-    <button (click)="gameRun()">Run</button>
-  </div>
-  <div class="app-game-buttons--game-stop">
-    <button (click)="gameStop()">Stop</button>
-  </div>
-  <button (click)="runMoveSphere()">move</button>
-  <button (click)="stopMoveSphere()">stop</button>
-  <button (click)="reverseMoveSphere()">reverse</button>
-</div>
-

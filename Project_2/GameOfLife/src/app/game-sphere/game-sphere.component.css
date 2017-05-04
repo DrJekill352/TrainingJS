@@ -1,5 +1,11 @@
-.game-sphere--sphere{
-  width: 960px;
+game-sphere {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.game-sphere--sphere {
+  width: 800px;
   height: 600px;
 }
 
@@ -9,7 +15,47 @@
   stroke-width: 2;
 }
 
-.sphere--sphere-polygons{
+.sphere--sphere-polygons {
   stroke: #444;
   fill: white;
+}
+
+.game-sphere--run-move-button {
+  font-size: 16px;
+  text-align: center;
+  width: 75px;
+  margin: 5px 0 5px 0;
+}
+
+.game-sphere--stop-move-button {
+  font-size: 20px;
+  text-align: center;
+  width: 120px;
+  margin: 5px 5px 5px 5px;
+  background-color: #02796B;
+  color: white;
+  border-radius: 7px;
+  line-height: 30px;
+}
+
+.game-sphere--reverse-move-button {
+  font-size: 20px;
+  text-align: center;
+  width: 120px;
+  margin: 5px 5px 5px 5px;
+  background-color: #02796B;
+  color: white;
+  border-radius: 7px;
+  line-height: 30px;
+}
+
+.game-sphere--sphere-buttons button {
+  font-size: 20px;
+  text-align: center;
+  width: 120px;
+  margin: 5px 5px 5px 5px;
+  background-color: #02796B;
+  color: white;
+  border-radius: 7px;
+  line-height: 30px;
 }
