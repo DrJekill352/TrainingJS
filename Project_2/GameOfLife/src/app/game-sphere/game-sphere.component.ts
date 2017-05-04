@@ -18,6 +18,7 @@ export class GameSphereComponent {
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
   private _isMove = false;
   private _distanse = 0;
+  private _direction: Direction = Direction.RIGHT;
 
   constructor() {
     this.drawSphere();
@@ -182,12 +183,24 @@ export class GameSphereComponent {
       this._projection.rotate([this._distanse / 150, 0]);
       this._svg.selectAll('path')
         .attr('d', this._path);
-      this._distanse+=50;
+      if (this._direction === Direction.RIGHT) {
+        this._distanse += 50;
+      } else {
+        this._distanse -= 50;
+      }
     }, 50);
   }
 
-  public stopMoveSphere():void{
+  public stopMoveSphere(): void {
     this._isMove = false;
+  }
+
+  public reverseMoveSphere() {
+    if (this._direction === Direction.RIGHT) {
+      this._direction = Direction.LEFT;
+    } else {
+      this._direction = Direction.RIGHT;
+    }
   }
 
   public get aliveCell(): Observable<AliveCell[]> {
@@ -222,4 +235,8 @@ export class GameSphereComponent {
       pathElement.style.fill = 'black';
     }
   }
+}
+enum Direction{
+  LEFT,
+  RIGHT
 }

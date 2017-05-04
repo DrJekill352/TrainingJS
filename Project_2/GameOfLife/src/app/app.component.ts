@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   private _isRun: boolean = false;
 
-    constructor() {
+  constructor() {
   }
 
   ngOnInit() {
@@ -61,5 +61,9 @@ export class AppComponent implements OnInit {
 
   public stopMoveSphere(): void {
     this._gameSphere.stopMoveSphere();
+  }
+
+  public reverseMoveSphere(): void {
+    this._gameSphere.reverseMoveSphere();
   }
 }
