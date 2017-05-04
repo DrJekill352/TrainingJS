@@ -7,11 +7,13 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { GameSphereComponent } from './game-sphere/game-sphere.component';
+import { GameRectangleComponent } from './game-rectangle/game-rectangle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameSphereComponent
+    GameSphereComponent,
+    GameRectangleComponent
   ],
   imports: [
     BrowserModule,

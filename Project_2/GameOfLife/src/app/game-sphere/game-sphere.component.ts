@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, Input} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {AliveCell} from '../alive-cell';
 
 import * as d3 from 'd3';

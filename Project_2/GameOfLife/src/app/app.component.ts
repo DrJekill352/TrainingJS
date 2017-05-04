@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {GameOfLife} from './game-of-life';
 import {GameSphereComponent} from './game-sphere/game-sphere.component';
+import {GameRectangleComponent} from './game-rectangle/game-rectangle.component'
 import {AliveCell} from './alive-cell';
 import * as d3 from "d3";
 
@@ -13,6 +14,7 @@ import * as d3 from "d3";
 export class AppComponent implements OnInit {
   private _gameOfLife: GameOfLife = new GameOfLife();
   private _gameSphere: GameSphereComponent = new GameSphereComponent();
+  private _gameRectangle: GameRectangleComponent = new GameRectangleComponent();
 
   private _nextGenerationAliveCells: AliveCell[] = [];
   private _aliveCells: AliveCell[] = [];
