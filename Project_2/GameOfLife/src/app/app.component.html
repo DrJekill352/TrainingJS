@@ -1,8 +1,17 @@
-<div class="app-root--sphere">
-  <app-game-sphere></app-game-sphere>
+<div class="app-component--sphere">
+  <game-sphere></game-sphere>
 </div>
-<div class="app-root--game-buttons">
-  <button (click)="gameStep()">Step</button>
-  <button (click)="gameRun()">Run</button>
-  <button (click)="gameStop()">Stop</button>
+<div class="app-component--game-buttons">
+  <div class="app-game-buttons--game-step">
+    <button (click)="gameStep()">Step</button>
+  </div>
+  <div class="app-game-buttons--game-run">
+    <button (click)="gameRun()">Run</button>
+  </div>
+  <div class="app-game-buttons--game-stop">
+    <button (click)="gameStop()">Stop</button>
+  </div>
+  <button (click)="runMoveSphere()">move</button>
+  <button (click)="stopMoveSphere()">stop</button>
 </div>
+

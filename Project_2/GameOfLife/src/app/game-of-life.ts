@@ -6,6 +6,8 @@ import {Observable, Subject} from 'rxjs';
 export class GameOfLife {
   private _field: GameField = new GameField();
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
+  private _aliveCells: AliveCell[] = [];
+  private _nextGenerationAliveCells: AliveCell[];
 
   constructor() {
   }
@@ -19,6 +21,7 @@ export class GameOfLife {
         aliveCells.push(aliveCell);
       }
     }
+    this._aliveCells = aliveCells;
     this._aliveCellsSubject.next(aliveCells);
   }
 
@@ -31,7 +34,6 @@ export class GameOfLife {
         countAliveCells++;
       }
     }
-
 
     if (countAliveCells === 2) {
       return true;
@@ -57,7 +59,41 @@ export class GameOfLife {
     }
   }
 
-  public updateCells(): void {
+  private updateCells(nextGenerationAliveCells): void {
+    let bornCells: AliveCell[] = nextGenerationAliveCells.filter(x => {
+      let bornCell = this._aliveCells.find(cell => cell.coordinateX == x.coordinateX &&
+      cell.coordinateY == x.coordinateY);
+      if (bornCell === undefined) {
+        return true;
+      }
+    });
+
+    let deadCells: AliveCell[] = this._aliveCells.filter((x: AliveCell) => {
+      let deadCell: boolean = nextGenerationAliveCells.find(cell => {
+        cell.coordinateX == x.coordinateX && cell.coordinateY == x.coordinateY
+      });
+      if (deadCell !== undefined) {
+        return true;
+      }
+    });
+    if (bornCells) {
+      for (let bornCell of bornCells) {
+        if (bornCell.coordinateX == 0 && bornCell.coordinateY == 5 || bornCell.coordinateX == 35.5 && bornCell.coordinateY == 5) {
+        }
+        this._field.toggleCellLiveState(bornCell.coordinateX, bornCell.coordinateY);
+      }
+    }
+    if (deadCells) {
+      for (let deadCell of deadCells) {
+        this._field.toggleCellLiveState(deadCell.coordinateX, deadCell.coordinateY);
+      }
+    }
+  }
+
+
+  public gameStep(): void {
+    this.updateCells(this._nextGenerationAliveCells);
+
     let cells: Cell[] = this._field.cells;
     let updateCellsNumber: number[] = [];
     for (let index = 0; index < cells.length; index++) {
@@ -83,13 +119,11 @@ export class GameOfLife {
     this.updateAliveCells(cells);
   }
 
-  public toggleCellLiveState(coordinateX: number, coordinateY: number): void {
-    let cell: Cell = this._field.cells.find(c => c.coordinateX === coordinateX && c.coordinateY === coordinateY);
-    cell.toggleLiveState();
+  public set nextGenerationAliveCells(nextGenerationAliveCells) {
+    this._nextGenerationAliveCells = nextGenerationAliveCells;
   }
 
   public get aliveCellsObservable(): Observable<AliveCell[]> {
     return this._aliveCellsSubject;
   }
-
 }

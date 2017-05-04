@@ -1,15 +1,14 @@
 import {Component, ViewEncapsulation, Input} from '@angular/core';
 import {AliveCell} from '../alive-cell';
 
-import * as d3 from "d3";
-import {Observable, Subject} from 'rxjs';
+import * as d3 from 'd3';
+import {Observable, Subject} from 'rxjs/Rx';
 
 @Component({
-  selector: 'app-game-sphere',
+  selector: 'game-sphere',
   templateUrl: './game-sphere.component.html',
   styleUrls: ['./game-sphere.component.css'],
   encapsulation: ViewEncapsulation.None
-
 })
 export class GameSphereComponent {
 
@@ -17,24 +16,20 @@ export class GameSphereComponent {
   private _path: any = d3.geoPath().projection(this._projection);
   private _svg: any;
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
-
-  private _aliveCells: AliveCell[] = [];
-  private _isWork: boolean = false;
+  private _isMove = false;
+  private _distanse = 0;
 
   constructor() {
     this.drawSphere();
-  }
-
-  ngOnInit() {
   }
 
   private drawSphere() {
     let projection: any = d3.geoOrthographic();
     let path: any = d3.geoPath().projection(projection);
 
-    let sphereElement: any = d3.select('app-game-sphere');
+    let sphereElement: any = d3.select('game-sphere');
     sphereElement.append('svg')
-      .attr('class', 'app-sphere');
+      .attr('class', 'game-sphere--sphere');
 
     this._svg = d3.select('svg');
 
@@ -46,20 +41,20 @@ export class GameSphereComponent {
     }
 
     this._svg.append('path')
-      .attr('class', 'app-sphere--sphere')
-      .datum({type: "Sphere"})
+      .attr('class', 'sphere--sphere')
+      .datum({type: 'Sphere'})
       .attr('d', path);
 
     this._svg.append('g')
-      .attr('class', 'polygons')
+      .attr('class', 'sphere--sphere-polygons')
       .selectAll('path')
       .data(hexsPoints)
       .enter()
       .append('path')
       .attr('d', path);
 
-    if (document.querySelector('.polygons') != null) {
-      document.querySelector('.polygons').addEventListener('click', this.onSelectCell);
+    if (document.querySelector('.sphere--sphere-polygons') != null) {
+      document.querySelector('.sphere--sphere-polygons').addEventListener('click', this.onSelectCell);
     }
   }
 
@@ -80,7 +75,7 @@ export class GameSphereComponent {
     var point6: number[] = [centerPoint.x, centerPoint.y + hexSideLenght];
 
     return {
-      type: "Polygon",
+      type: 'Polygon',
       coordinates: [[point6, point1, point2, point3, point4, point5, point6]]
     }
   }
@@ -106,14 +101,14 @@ export class GameSphereComponent {
 
   private onSelectCell(event) {
     let cell = event.target;
-    let poligons = document.querySelector(".polygons");
+    let poligons = document.querySelector('.sphere--sphere-polygons');
     this._svg = d3.select('svg');
 
     if (cell != poligons) {
-      if (cell.style.fill === "black") {
-        cell.style.fill = "white";
+      if (cell.style.fill === 'black') {
+        cell.style.fill = 'white';
       } else {
-        cell.style.fill = "black";
+        cell.style.fill = 'black';
       }
     }
 
@@ -144,7 +139,7 @@ export class GameSphereComponent {
 
   }
 
-  private updateAliveCell(): void {
+  private updateAliveCells(): void {
     this._svg = d3.select('svg');
     let svgGElement = this._svg.select('g');
     let svgPathElements = svgGElement.selectAll('path').nodes();
@@ -153,7 +148,7 @@ export class GameSphereComponent {
     let aliveCells: AliveCell[] = [];
 
     for (let i = 0; i < svgPathElements.length; i++) {
-      if (svgPathElements[i].style.fill === "black") {
+      if (svgPathElements[i].style.fill === 'black') {
         let coordinateY: number = 0;
         for (let index = 0; index <= i; index += ROW_HEX_COUNT) {
           coordinateY++;
@@ -177,23 +172,30 @@ export class GameSphereComponent {
     this._aliveCellsSubject.next(aliveCells);
   }
 
-  public moveSphere(): void {
-    let work = d3.interval((elapsed) => {
-      if (this._isWork == false) {
-        work.stop();
+  public runMoveSphere(): void {
+    this._isMove = true;
+
+    let move = d3.interval((elapsed) => {
+      if (this._isMove == false) {
+        move.stop();
       }
-      this._projection.rotate([elapsed / 150, 0]);
+      this._projection.rotate([this._distanse / 150, 0]);
       this._svg.selectAll('path')
         .attr('d', this._path);
+      this._distanse+=50;
     }, 50);
+  }
+
+  public stopMoveSphere():void{
+    this._isMove = false;
   }
 
   public get aliveCell(): Observable<AliveCell[]> {
     return this._aliveCellsSubject;
   }
 
-  public updateSphereCell(): void {
-    this.updateAliveCell();
+  public gameStep(): void {
+    this.updateAliveCells();
     this.clearSphereField();
   }
 
@@ -203,7 +205,7 @@ export class GameSphereComponent {
     let svgPathElements = svgGElement.selectAll('path').nodes();
 
     for (let i = 0; i < svgPathElements.length; i++) {
-      svgPathElements[i].style.fill = "white";
+      svgPathElements[i].style.fill = 'white';
     }
   }
 
@@ -212,15 +214,12 @@ export class GameSphereComponent {
     let svgGElement = this._svg.select('g');
     let svgPathElements = svgGElement.selectAll('path').nodes();
     const ROW_HEX_COUNT: number = 36;
+
     for (let aliveCell of aliveCells) {
       let numberPathElement = aliveCell.coordinateY * ROW_HEX_COUNT + Math.floor(aliveCell.coordinateX);
       let pathElement = svgPathElements[numberPathElement];
 
-      pathElement.style.fill = "black";
+      pathElement.style.fill = 'black';
     }
-  }
-
-  public set isWork(isWork: boolean) {
-    this._isWork = isWork;
   }
 }

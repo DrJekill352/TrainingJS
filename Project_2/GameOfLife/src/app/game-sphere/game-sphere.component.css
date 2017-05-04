@@ -1,15 +1,15 @@
-.app-sphere{
+.game-sphere--sphere{
   width: 960px;
   height: 600px;
 }
 
-.app-sphere--sphere {
+.sphere--sphere {
   stroke: #444;
   fill: white;
   stroke-width: 2;
 }
 
-.polygons {
+.sphere--sphere-polygons{
   stroke: #444;
   fill: white;
 }

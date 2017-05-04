@@ -5,7 +5,7 @@ import {AliveCell} from './alive-cell';
 import * as d3 from "d3";
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-component',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None
@@ -14,12 +14,12 @@ export class AppComponent implements OnInit {
   private _gameOfLife: GameOfLife = new GameOfLife();
   private _gameSphere: GameSphereComponent = new GameSphereComponent();
 
-  private _newAliveCells: any = null;
+  private _nextGenerationAliveCells: AliveCell[] = [];
   private _aliveCells: AliveCell[] = [];
 
-  private _isWork: boolean = false;
+  private _isRun: boolean = false;
 
-  constructor() {
+    constructor() {
   }
 
   ngOnInit() {
@@ -28,55 +28,23 @@ export class AppComponent implements OnInit {
     });
 
     this._gameSphere.aliveCell.subscribe((newAliveCells) => {
-      this._newAliveCells = newAliveCells;
+      this._nextGenerationAliveCells = newAliveCells;
     });
+    this.gameStep();
   }
 
-  private updateCellsUpdateStatus(): void {
-
-    let bornCells: AliveCell[] = this._newAliveCells.filter(x => {
-      let bornCell = this._aliveCells.find(cell => cell.coordinateX == x.coordinateX &&
-      cell.coordinateY == x.coordinateY);
-      if (bornCell === undefined) {
-        return true;
-      }
-    });
-
-    let deadCells: AliveCell[] = this._aliveCells.filter(x => {
-      let deadCell: AliveCell = this._newAliveCells.find(cell => {
-        cell.coordinateX == x.coordinateX && cell.coordinateY == x.coordinateY
-      });
-      if (deadCell !== undefined) {
-        return true;
-      }
-    });
-    if (bornCells) {
-      for (let bornCell of bornCells) {
-        if (bornCell.coordinateX == 0 && bornCell.coordinateY == 5 || bornCell.coordinateX == 35.5 && bornCell.coordinateY == 5) {
-        }
-        this._gameOfLife.toggleCellLiveState(bornCell.coordinateX, bornCell.coordinateY);
-      }
-    }
-    if (deadCells) {
-      for (let deadCell of deadCells) {
-        this._gameOfLife.toggleCellLiveState(deadCell.coordinateX, deadCell.coordinateY);
-      }
-    }
-  }
 
   public gameStep() {
-    this._gameSphere.updateSphereCell();
-    this.updateCellsUpdateStatus();
-    this._gameOfLife.updateCells();
+    this._gameSphere.gameStep();
+    this._gameOfLife.nextGenerationAliveCells = this._nextGenerationAliveCells;
+    this._gameOfLife.gameStep();
     this._gameSphere.drawAliveCells(this._aliveCells);
   }
 
   public gameRun() {
-    this._isWork = true;
-    this._gameSphere.isWork = true;
-    this._gameSphere.moveSphere();
-    let work = d3.interval((elapsed) => {
-      if(this._isWork == false){
+    this._isRun = true;
+    let work = d3.interval(() => {
+      if (this._isRun === false) {
         work.stop();
       }
       this.gameStep();
@@ -84,11 +52,14 @@ export class AppComponent implements OnInit {
   }
 
   public gameStop() {
-    this._isWork = false;
-    this._gameSphere.isWork = false;
+    this._isRun = false;
   }
 
-  public get aliveCells(): AliveCell[] {
-    return this._aliveCells;
+  public runMoveSphere(): void {
+    this._gameSphere.runMoveSphere();
+  }
+
+  public stopMoveSphere(): void {
+    this._gameSphere.stopMoveSphere();
   }
 }
