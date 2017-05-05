@@ -29,16 +29,18 @@ export class AppComponent implements OnInit {
       this._aliveCells = aliveCells;
     });
 
-    this._gameSphere.aliveCell.subscribe((newAliveCells) => {
-      this._nextGenerationAliveCells = newAliveCells;
+    this._gameSphere.aliveCell.subscribe((nextGenerationAliveCells) => {
+      this._nextGenerationAliveCells = nextGenerationAliveCells;
     });
   }
 
 
   public gameStep() {
     this._gameSphere.gameStep();
+    this._gameRectangle.gameStep();
     this._gameOfLife.nextGenerationAliveCells = this._nextGenerationAliveCells;
     this._gameOfLife.gameStep();
+    this._gameRectangle.drawAliveCells(this._aliveCells);
     this._gameSphere.drawAliveCells(this._aliveCells);
   }
 

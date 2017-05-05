@@ -120,24 +120,6 @@ export class GameSphereComponent {
         return true;
       }
     });
-
-    let coordinateY: number = 0;
-    let ROW_HEX_COUNT: number = 36;
-    for (let index = 0; index <= selectCellNumber; index += ROW_HEX_COUNT) {
-      coordinateY++;
-    }
-
-    let magicNumber: number = coordinateY * ROW_HEX_COUNT;
-    let coordinateX = selectCellNumber - magicNumber + ROW_HEX_COUNT;
-    if (coordinateX < 0) {
-      coordinateX += ROW_HEX_COUNT;
-    }
-    coordinateY--;
-
-    if (coordinateY % 2 == 1) {
-      coordinateX += 0.5;
-    }
-
   }
 
   private updateAliveCells(): void {

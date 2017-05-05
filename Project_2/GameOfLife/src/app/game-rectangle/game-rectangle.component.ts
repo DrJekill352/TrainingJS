@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {AliveCell} from '../alive-cell';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AliveCell } from '../alive-cell';
 import * as d3 from 'd3';
-import {Observable, Subject} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'game-rectangle',
@@ -53,21 +53,20 @@ export class GameRectangleComponent implements OnInit {
 
   private get points(): any[] {
     let points: any[] = [];
-    for (let i = 20; i <= 560; i += 30) {
+    for (let i = 20; i <= 500; i += 30) {
       if ((i / 10) % 2 == 0) {
         for (let j = 20; j < 1100; j += 30) {
-          let point: any = {x: j, y: i};
+          let point: any = { x: j, y: i };
           points.push(point);
         }
       } else {
         let d = 0;
         for (let j = 35; j < 1100; j += 30) {
-          let point: any = {x: j, y: i};
+          let point: any = { x: j, y: i };
           points.push(point);
         }
       }
     }
-    console.log(points);
     return points;
   }
 
@@ -136,24 +135,70 @@ export class GameRectangleComponent implements OnInit {
         return true;
       }
     });
+  }
 
-    let coordinateY: number = 0;
-    let ROW_HEX_COUNT: number = 36;
-    for (let index = 0; index <= selectCellNumber; index += ROW_HEX_COUNT) {
-      coordinateY++;
-    }
+  private updateAliveCells(): void {
+    this._svg = d3.select('svg');
+    let svgGElement = this._svg.select('g');
+    let svgPathElements = svgGElement.selectAll('path').nodes();
+    const ROW_HEX_COUNT: number = 36;
 
-    let magicNumber: number = coordinateY * ROW_HEX_COUNT;
-    let coordinateX = selectCellNumber - magicNumber + ROW_HEX_COUNT;
-    if (coordinateX < 0) {
-      coordinateX += ROW_HEX_COUNT;
-    }
-    coordinateY--;
+    let aliveCells: AliveCell[] = [];
 
-    if (coordinateY % 2 == 1) {
-      coordinateX += 0.5;
+    for (let i = 0; i < svgPathElements.length; i++) {
+      if (svgPathElements[i].style.fill === 'black') {
+        let coordinateY: number = 0;
+        for (let index = 0; index <= i; index += ROW_HEX_COUNT) {
+          coordinateY++;
+        }
+        let magicNumber: number = coordinateY * ROW_HEX_COUNT;
+        let coordinateX = i - magicNumber + ROW_HEX_COUNT;
+        if (coordinateX < 0) {
+          coordinateX += ROW_HEX_COUNT;
+        }
+        coordinateY--;
+
+        if (coordinateY % 2 == 1) {
+          coordinateX += 0.5;
+        }
+        if (coordinateX == 0.5 && coordinateY == 5 || coordinateX == 35.5 && coordinateY == 5) {
+        }
+        let aliveCell: AliveCell = new AliveCell(coordinateX, coordinateY);
+        aliveCells.push(aliveCell);
+      }
     }
-    console.log(coordinateY);
-    console.log(coordinateX);
+    this._aliveCellsSubject.next(aliveCells);
+  }
+
+  public get aliveCell(): Observable<AliveCell[]> {
+    return this._aliveCellsSubject;
+  }
+
+  public gameStep(): void {
+    this.updateAliveCells();
+    this.clearSphereField();
+  }
+
+  public clearSphereField(): void {
+    this._svg = d3.select('svg');
+    let svgGElement = this._svg.select('g');
+    let svgPathElements = svgGElement.selectAll('path').nodes();
+
+    for (let i = 0; i < svgPathElements.length; i++) {
+      svgPathElements[i].style.fill = 'white';
+    }
+  }
+  public drawAliveCells(aliveCells: AliveCell[]): void {
+    this._svg = d3.select('svg');
+    let svgGElement = this._svg.select('g');
+    let svgPathElements = svgGElement.selectAll('path').nodes();
+    const ROW_HEX_COUNT: number = 36;
+
+    for (let aliveCell of aliveCells) {
+      let numberPathElement = aliveCell.coordinateY * ROW_HEX_COUNT + Math.floor(aliveCell.coordinateX);
+      let pathElement = svgPathElements[numberPathElement];
+
+      pathElement.style.fill = 'black';
+    }
   }
 }
