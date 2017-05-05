@@ -55,13 +55,13 @@ export class GameRectangleComponent implements OnInit {
     let points: any[] = [];
     for (let i = 20; i <= 560; i += 30) {
       if ((i / 10) % 2 == 0) {
-        for (let j = 10; j < 1090; j += 30) {
+        for (let j = 20; j < 1100; j += 30) {
           let point: any = {x: j, y: i};
           points.push(point);
         }
       } else {
         let d = 0;
-        for (let j = 19; j < 1090; j += 30) {
+        for (let j = 35; j < 1100; j += 30) {
           let point: any = {x: j, y: i};
           points.push(point);
         }
@@ -72,7 +72,7 @@ export class GameRectangleComponent implements OnInit {
   }
 
   private getHexPoint(centerPoint) {
-    let hexSideLenght: number = 18;
+    let hexSideLenght: number = 19;
 
     let normalLineLenght: number = Math.sqrt(3) * (18 / 2);
 
