@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   private _aliveCells: AliveCell[] = [];
 
   private _isRun: boolean = false;
+  private _isSphere: boolean = true;
 
   constructor() {
   }
@@ -52,6 +53,17 @@ export class AppComponent implements OnInit {
       }
       this.gameStep();
     }, 1000);
+  }
+
+  public switchShape() {
+    this._isSphere = !this._isSphere;
+
+    this._gameSphere.gameStep();
+    this._gameRectangle.gameStep();
+    this._gameOfLife.nextGenerationAliveCells = this._nextGenerationAliveCells;
+    this._gameOfLife.checkAliveCells();
+    this._gameRectangle.drawAliveCells(this._aliveCells);
+    this._gameSphere.drawAliveCells(this._aliveCells);
   }
 
   public gameStop() {

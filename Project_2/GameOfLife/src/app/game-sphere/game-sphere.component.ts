@@ -1,52 +1,51 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {AliveCell} from '../alive-cell';
+import { Component, ViewEncapsulation, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { AliveCell } from '../alive-cell';
 
 import * as d3 from 'd3';
-import {Observable, Subject} from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'game-sphere',
   templateUrl: './game-sphere.component.html',
   styleUrls: ['./game-sphere.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GameSphereComponent {
-
-  private _projection: any = d3.geoOrthographic();
-  private _path: any = d3.geoPath().projection(this._projection);
-  private _svg: any;
+export class GameSphereComponent implements OnInit {
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
-  private _isMove = false;
-  private _distanse = 0;
+  private _isMove: boolean = false;
+  private _elapsed: number = 0;
   private _direction: Direction = Direction.RIGHT;
 
   constructor() {
+  }
+
+  ngOnInit() {
     this.drawSphere();
   }
 
-  private drawSphere() {
+  private drawSphere(): void {
     let projection: any = d3.geoOrthographic();
     let path: any = d3.geoPath().projection(projection);
-
-    let sphereElement: any = d3.select('game-sphere');
-    sphereElement.append('svg')
-      .attr('class', 'game-sphere--sphere');
-
-    this._svg = d3.select('svg');
-
+    let sphereElement: any = d3.select('.game-sphere--sphere');
     let points: any[] = this.points;
-    let hexsPoints: any[] = [];
+    let hexsPoints: any[] = [];    
+
+    sphereElement.append('svg')
+      .attr('class', 'sphere');
+
+    let svg: any = d3.select('svg');
 
     for (let i = 0; i < points.length; i += 1) {
-      hexsPoints.push(this.getHexPoint(points[i]));
+      hexsPoints.push(this.getHexPolygon(points[i]));
     }
 
-    this._svg.append('path')
+    svg.append('path')
       .attr('class', 'sphere--sphere')
-      .datum({type: 'Sphere'})
+      .datum({ type: 'Sphere' })
       .attr('d', path);
 
-    this._svg.append('g')
+    svg.append('g')
       .attr('class', 'sphere--sphere-polygons')
       .selectAll('path')
       .data(hexsPoints)
@@ -59,7 +58,7 @@ export class GameSphereComponent {
     }
   }
 
-  private getHexPoint(centerPoint) {
+  private getHexPolygon(centerPoint): any {
     let hexSideLenght: number = 6.4;
     let normalLineLenght: number = Math.sqrt(3) * (6 / 2);
 
@@ -83,16 +82,17 @@ export class GameSphereComponent {
 
   private get points(): any[] {
     let points: any[] = [];
+
     for (let i = -80; i <= 80; i += 10) {
       if ((i / 10) % 2 == 0) {
         for (let j = 0; j < 360; j += 10) {
-          let point: any = {x: j, y: i};
+          let point: any = { x: j, y: i };
           points.push(point);
         }
       } else {
         let d = 0;
         for (let j = 5; j < 360; j += 10) {
-          let point: any = {x: j, y: i};
+          let point: any = { x: j, y: i };
           points.push(point);
         }
       }
@@ -100,10 +100,10 @@ export class GameSphereComponent {
     return points;
   }
 
-  private onSelectCell(event) {
-    let cell = event.target;
-    let poligons = document.querySelector('.sphere--sphere-polygons');
-    this._svg = d3.select('svg');
+  private onSelectCell(event): void {
+    let cell: any = event.target;
+    let poligons: Element = document.querySelector('.sphere--sphere-polygons');
+    let svg: any = d3.select('svg');
 
     if (cell != poligons) {
       if (cell.style.fill === 'black') {
@@ -113,9 +113,10 @@ export class GameSphereComponent {
       }
     }
 
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
-    let selectCellNumber = svgPathElements.findIndex(p => {
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
+
+    let selectCellNumber: number = svgPathElements.findIndex(p => {
       if (p == cell) {
         return true;
       }
@@ -123,11 +124,10 @@ export class GameSphereComponent {
   }
 
   private updateAliveCells(): void {
-    this._svg = d3.select('svg');
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
+    let svg: any = d3.select('svg');
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
     const ROW_HEX_COUNT: number = 36;
-
     let aliveCells: AliveCell[] = [];
 
     for (let i = 0; i < svgPathElements.length; i++) {
@@ -145,9 +145,8 @@ export class GameSphereComponent {
 
         if (coordinateY % 2 == 1) {
           coordinateX += 0.5;
-        }
-        if (coordinateX == 0.5 && coordinateY == 5 || coordinateX == 35.5 && coordinateY == 5) {
-        }
+        }        
+
         let aliveCell: AliveCell = new AliveCell(coordinateX, coordinateY);
         aliveCells.push(aliveCell);
       }
@@ -157,18 +156,21 @@ export class GameSphereComponent {
 
   public runMoveSphere(): void {
     this._isMove = true;
+    let svg: any = d3.select('svg');
+    let projection: any = d3.geoOrthographic();
+    let path: any = d3.geoPath().projection(projection);
 
-    let move = d3.interval((elapsed) => {
+    let move: any = d3.interval((elapsed) => {
       if (this._isMove == false) {
         move.stop();
       }
-      this._projection.rotate([this._distanse / 150, 0]);
-      this._svg.selectAll('path')
-        .attr('d', this._path);
+      projection.rotate([this._elapsed / 150, 0]);
+      svg.selectAll('path')
+        .attr('d', path);
       if (this._direction === Direction.RIGHT) {
-        this._distanse += 50;
+        this._elapsed += 50;
       } else {
-        this._distanse -= 50;
+        this._elapsed -= 50;
       }
     }, 50);
   }
@@ -177,7 +179,7 @@ export class GameSphereComponent {
     this._isMove = false;
   }
 
-  public reverseMoveSphere() {
+  public reverseMoveSphere(): void {
     if (this._direction === Direction.RIGHT) {
       this._direction = Direction.LEFT;
     } else {
@@ -195,9 +197,9 @@ export class GameSphereComponent {
   }
 
   public clearSphereField(): void {
-    this._svg = d3.select('svg');
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
+    let svg: any = d3.select('svg');
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
 
     for (let i = 0; i < svgPathElements.length; i++) {
       svgPathElements[i].style.fill = 'white';
@@ -205,20 +207,21 @@ export class GameSphereComponent {
   }
 
   public drawAliveCells(aliveCells: AliveCell[]): void {
-    this._svg = d3.select('svg');
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
+    let svg: any = d3.select('svg');
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
     const ROW_HEX_COUNT: number = 36;
 
     for (let aliveCell of aliveCells) {
-      let numberPathElement = aliveCell.coordinateY * ROW_HEX_COUNT + Math.floor(aliveCell.coordinateX);
-      let pathElement = svgPathElements[numberPathElement];
+      let numberPathElement: number = aliveCell.coordinateY * ROW_HEX_COUNT + Math.floor(aliveCell.coordinateX);
+      let pathElement: any = svgPathElements[numberPathElement];
 
       pathElement.style.fill = 'black';
     }
   }
 }
-enum Direction{
+
+enum Direction {
   LEFT,
   RIGHT
 }

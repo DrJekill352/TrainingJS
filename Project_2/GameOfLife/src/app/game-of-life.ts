@@ -119,6 +119,12 @@ export class GameOfLife {
     this.updateAliveCells(cells);
   }
 
+  public checkAliveCells():void{
+    this.updateCells(this._nextGenerationAliveCells);
+    let cells: Cell[] = this._field.cells;
+    this.updateAliveCells(cells);
+  }
+
   public set nextGenerationAliveCells(nextGenerationAliveCells) {
     this._nextGenerationAliveCells = nextGenerationAliveCells;
   }

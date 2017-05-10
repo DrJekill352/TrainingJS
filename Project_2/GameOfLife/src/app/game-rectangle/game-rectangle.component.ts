@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { AliveCell } from '../alive-cell';
 import * as d3 from 'd3';
 import { Observable, Subject } from 'rxjs';
@@ -7,36 +7,36 @@ import { Observable, Subject } from 'rxjs';
   selector: 'game-rectangle',
   templateUrl: './game-rectangle.component.html',
   styleUrls: ['./game-rectangle.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameRectangleComponent implements OnInit {
-
-  private _svg: any;
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
 
   constructor() {
-    this.drawRectangle();
   }
 
   ngOnInit() {
+    this.drawRectangle();
   }
 
-  private drawRectangle() {
+  private drawRectangle(): void {
     let projection: any = d3.geoOrthographic();
     let path: any = d3.geoPath().projection(projection);
     let sphereElement: any = d3.select('game-rectangle');
-    sphereElement.append('svg')
-      .attr('class', 'game-rectangle--rectangle');
-
-    this._svg = d3.select('svg');
     let points: any[] = this.points;
     let hexsPoints: any[] = [];
 
+    sphereElement.append('svg')
+      .attr('class', 'game-rectangle--rectangle');
+
+    let svg: any = d3.select('svg');
+
     for (let i = 0; i < points.length; i += 1) {
-      hexsPoints.push(this.getHexPoint(points[i]));
+      hexsPoints.push(this.getHexPolygon(points[i]));
     }
 
-    this._svg.append('g')
+    svg.append('g')
       .attr('class', 'game-rectangle--rectangle-polygons')
       .selectAll('path')
       .data(hexsPoints)
@@ -53,6 +53,7 @@ export class GameRectangleComponent implements OnInit {
 
   private get points(): any[] {
     let points: any[] = [];
+
     for (let i = 20; i <= 500; i += 30) {
       if ((i / 10) % 2 == 0) {
         for (let j = 20; j < 1100; j += 30) {
@@ -70,9 +71,8 @@ export class GameRectangleComponent implements OnInit {
     return points;
   }
 
-  private getHexPoint(centerPoint) {
+  private getHexPolygon(centerPoint): any {
     let hexSideLenght: number = 19;
-
     let normalLineLenght: number = Math.sqrt(3) * (18 / 2);
 
     var point1: number[] = [centerPoint.x + normalLineLenght, centerPoint.y + (hexSideLenght / 2)];
@@ -115,10 +115,10 @@ export class GameRectangleComponent implements OnInit {
     return pathString;
   }
 
-  private onSelectCell(event) {
-    let cell = event.target;
-    let poligons = document.querySelector('.game-rectangle--rectangle-polygons');
-    this._svg = d3.select('svg');
+  private onSelectCell(event): void {
+    let cell: any = event.target;
+    let poligons: Element = document.querySelector('.game-rectangle--rectangle-polygons');
+    let svg: any = d3.select('svg');
 
     if (cell != poligons) {
       if (cell.style.fill === 'black') {
@@ -128,9 +128,9 @@ export class GameRectangleComponent implements OnInit {
       }
     }
 
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
-    let selectCellNumber = svgPathElements.findIndex(p => {
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
+    let selectCellNumber: any = svgPathElements.findIndex(p => {
       if (p == cell) {
         return true;
       }
@@ -138,9 +138,9 @@ export class GameRectangleComponent implements OnInit {
   }
 
   private updateAliveCells(): void {
-    this._svg = d3.select('svg');
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
+    let svg: any = d3.select('svg');
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
     const ROW_HEX_COUNT: number = 36;
 
     let aliveCells: AliveCell[] = [];
@@ -180,18 +180,19 @@ export class GameRectangleComponent implements OnInit {
   }
 
   public clearSphereField(): void {
-    this._svg = d3.select('svg');
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
+    let svg: any = d3.select('svg');
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
 
     for (let i = 0; i < svgPathElements.length; i++) {
       svgPathElements[i].style.fill = 'white';
     }
   }
+
   public drawAliveCells(aliveCells: AliveCell[]): void {
-    this._svg = d3.select('svg');
-    let svgGElement = this._svg.select('g');
-    let svgPathElements = svgGElement.selectAll('path').nodes();
+    let svg: any = d3.select('svg');
+    let svgGElement: any = svg.select('g');
+    let svgPathElements: any[] = svgGElement.selectAll('path').nodes();
     const ROW_HEX_COUNT: number = 36;
 
     for (let aliveCell of aliveCells) {

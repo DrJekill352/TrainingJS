@@ -4,7 +4,12 @@ game-sphere {
   justify-content: space-between;
 }
 
-.game-sphere--sphere {
+.game-sphere--sphere{
+  position: relative;
+  left: -150px;
+}
+
+.sphere {
   width: 800px;
   height: 600px;
 }

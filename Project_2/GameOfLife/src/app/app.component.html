@@ -1,11 +1,18 @@
 <div class="app-component--header">Game Of Life</div>
 <div class="app-component-content">
-  <div class="app-component--sphere">
+  <div class="app-component--sphere" *ngIf="_isSphere; else rectangle">
     <game-sphere></game-sphere>
-    <!--<game-rectangle></game-rectangle>-->
   </div>
+  <ng-template #rectangle>
+    <div class="app-component--rectangle">
+      <game-rectangle></game-rectangle>
+    </div>
+  </ng-template>
   <div class="app-component--game-buttons">
     <div class="game-buttons">
+      <div class="game-buttos--switch-shape-button-wrapper">
+        <button class="game-buttos--switch-shape-button" (click)="switchShape()">Switch Shape</button>
+      </div>
       <div class="game-buttons--game-step-button-wrapper">
         <button class="game-buttons--game-step-button" (click)="gameStep()">Step</button>
       </div>

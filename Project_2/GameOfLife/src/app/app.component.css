@@ -1,7 +1,6 @@
 .app-component-content {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .app-component--header {
@@ -15,6 +14,10 @@
 }
 
 .app-component--sphere {
+  width: 90%;  
+}
+
+.app-component--rectangle {
   width: 90%;
 }
 
@@ -47,6 +50,16 @@
 
 .game-buttons--game-stop-button {
   font-size: 20px;
+  text-align: center;
+  width: 120px;
+  margin: 5px 5px 5px 5px;
+  background-color: #02796B;
+  color: white;
+  border-radius: 7px;
+  line-height: 30px;
+}
+.game-buttos--switch-shape-button{
+    font-size: 20px;
   text-align: center;
   width: 120px;
   margin: 5px 5px 5px 5px;
