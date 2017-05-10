@@ -4,11 +4,6 @@ game-sphere {
   justify-content: space-between;
 }
 
-.game-sphere--sphere{
-  position: relative;
-  left: -150px;
-}
-
 .sphere {
   width: 800px;
   height: 600px;
@@ -23,6 +18,11 @@ game-sphere {
 .sphere--sphere-polygons {
   stroke: #444;
   fill: white;
+}
+
+.game-sphere--sphere-buttons {
+  display: flex;
+  flex-direction: column;
 }
 
 .game-sphere--run-move-button {
@@ -63,4 +63,21 @@ game-sphere {
   color: white;
   border-radius: 7px;
   line-height: 30px;
+}
+
+@media (max-width: 1072px) {
+  game-sphere {
+    flex-direction: column-reverse;
+  }
+
+  .game-sphere--sphere-buttons {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 758px) {
+  .game-sphere--sphere {
+    position: relative;
+    left: -150px;
+  }
 }

@@ -14,14 +14,14 @@
 }
 
 .app-component--sphere {
-  width: 90%;  
+  width: 100%;
 }
 
 .app-component--rectangle {
-  width: 90%;
+  width: 100%;
 }
 
-.app-component--game-buttons {
+.game-buttons {
   display: flex;
   flex-direction: column;
 }
@@ -58,8 +58,9 @@
   border-radius: 7px;
   line-height: 30px;
 }
-.game-buttos--switch-shape-button{
-    font-size: 20px;
+
+.game-buttos--switch-shape-button {
+  font-size: 20px;
   text-align: center;
   width: 120px;
   margin: 5px 5px 5px 5px;
@@ -67,4 +68,18 @@
   color: white;
   border-radius: 7px;
   line-height: 30px;
+}
+
+@media (max-width: 1072px) {
+  .app-component-content {
+    flex-direction: column-reverse;
+  }
+
+  .game-buttons {
+    flex-direction: row;
+  }
+
+  .game-buttos--switch-shape-button {
+    width: 180px;
+  }
 }
