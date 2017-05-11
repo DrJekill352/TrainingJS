@@ -1,15 +1,15 @@
-.app-component-content {
+.app-component--content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .app-component--header {
-  height: 70px;
-  line-height: 70px;
+  height: 60px;
+  line-height: 60px;
   font-size: 30px;
   background-color: #02796B;
   color: white;
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
   padding: 0 0 0 10px;
 }
 
@@ -23,13 +23,13 @@
 
 .game-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .game-buttons--game-step-button {
   font-size: 20px;
   text-align: center;
-  width: 120px;
+  width: 130px;
   margin: 5px 5px 5px 5px;
   background-color: #02796B;;
   color: white;
@@ -40,7 +40,7 @@
 .game-buttons--game-run-button {
   font-size: 20px;
   text-align: center;
-  width: 120px;
+  width: 130px;
   margin: 5px 5px 5px 5px;
   background-color: #02796B;
   color: white;
@@ -51,7 +51,7 @@
 .game-buttons--game-stop-button {
   font-size: 20px;
   text-align: center;
-  width: 120px;
+  width: 130px;
   margin: 5px 5px 5px 5px;
   background-color: #02796B;
   color: white;
@@ -62,7 +62,7 @@
 .game-buttos--switch-shape-button {
   font-size: 20px;
   text-align: center;
-  width: 120px;
+  width: 180px;
   margin: 5px 5px 5px 5px;
   background-color: #02796B;
   color: white;
@@ -70,16 +70,14 @@
   line-height: 30px;
 }
 
-@media (max-width: 1072px) {
-  .app-component-content {
-    flex-direction: column-reverse;
-  }
+.app-component--not-pass-img {
+  width: 100%;
+}
 
-  .game-buttons {
-    flex-direction: row;
-  }
+.app-component--not-pass-text{
+  font-size: 30px;
+}
 
-  .game-buttos--switch-shape-button {
-    width: 180px;
-  }
+.app-component--not-pass{
+  text-align: center;
 }

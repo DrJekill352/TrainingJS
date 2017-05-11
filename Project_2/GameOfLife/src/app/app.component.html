@@ -1,5 +1,21 @@
 <div class="app-component--header">Game Of Life</div>
-<div class="app-component-content">
+<div class="app-component--content" *ngIf="_isView">
+  <div class="app-component--game-buttons">
+    <div class="game-buttons">
+      <div class="game-buttos--switch-shape-button-wrapper">
+        <button class="game-buttos--switch-shape-button" (click)="switchShape()">Switch Shape</button>
+      </div>
+      <div class="game-buttons--game-step-button-wrapper">
+        <button class="game-buttons--game-step-button" (click)="gameStep()">Step Game</button>
+      </div>
+      <div class="game-buttons--game-run-button-wrapper">
+        <button class="game-buttons--game-run-button" (click)="gameRun()">Run Game</button>
+      </div>
+      <div class="game-buttons--game-stop-button-wrapper">
+        <button class="game-buttons--game-stop-button" (click)="gameStop()">Stop Game</button>
+      </div>
+    </div>
+  </div>
   <div class="app-component--sphere" *ngIf="_isSphere; else rectangle">
     <game-sphere></game-sphere>
   </div>
@@ -8,20 +24,8 @@
       <game-rectangle></game-rectangle>
     </div>
   </ng-template>
-  <div class="app-component--game-buttons">
-    <div class="game-buttons">
-      <div class="game-buttos--switch-shape-button-wrapper">
-        <button class="game-buttos--switch-shape-button" (click)="switchShape()">Switch Shape</button>
-      </div>
-      <div class="game-buttons--game-step-button-wrapper">
-        <button class="game-buttons--game-step-button" (click)="gameStep()">Step</button>
-      </div>
-      <div class="game-buttons--game-run-button-wrapper">
-        <button class="game-buttons--game-run-button" (click)="gameRun()">Run</button>
-      </div>
-      <div class="game-buttons--game-stop-button-wrapper">
-        <button class="game-buttons--game-stop-button" (click)="gameStop()">Stop</button>
-      </div>
-    </div>
-  </div>
+</div>
+<div class="app-component--not-pass" *ngIf="!_isView" >
+  <img class="app-component--not-pass-img" src="../assets/you_shall_not_pass.jpg" alt="YOU SHALL NOT PASS">
+  <span class="app-component--not-pass-text">Sorry. But your device has a too small screen</span>
 </div>

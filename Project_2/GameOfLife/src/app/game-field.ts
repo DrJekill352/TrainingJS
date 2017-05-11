@@ -10,7 +10,7 @@ export class GameField {
   }
 
   private initField() {
-    for (let i = 0; i <= 18; i++) {
+    for (let i = 0; i <= 16; i++) {
       if (i % 2 == 0) {
         for (let j = 0; j < 36; j++) {
           let cell = new Cell(j, i);
@@ -32,7 +32,7 @@ export class GameField {
     const maxBCoordinateX: number = 35.5;
     const minACoordinateX: number = 0;
     const minBCoordinateX: number = 0.5;
-    const maxCoordinateY: number = 18;
+    const maxCoordinateY: number = 16;
     const minCoordinateY: number = 0;
 
     for (let i = 0; i < this._cells.length; i++) {

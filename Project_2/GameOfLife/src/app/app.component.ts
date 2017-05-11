@@ -20,9 +20,12 @@ export class AppComponent implements OnInit {
   private _aliveCells: AliveCell[] = [];
 
   private _isRun: boolean = false;
-  private _isSphere: boolean = true;
+
+  public _isSphere: boolean = true;
+  public _isView: boolean = false;
 
   constructor() {
+
   }
 
   ngOnInit() {
@@ -33,8 +36,17 @@ export class AppComponent implements OnInit {
     this._gameSphere.aliveCell.subscribe((nextGenerationAliveCells) => {
       this._nextGenerationAliveCells = nextGenerationAliveCells;
     });
+
+    this._isView = this.getIsView();
   }
 
+  private getIsView():boolean{
+    if (document.documentElement.clientWidth < 600) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   public gameStep() {
     this._gameSphere.gameStep();
@@ -57,17 +69,9 @@ export class AppComponent implements OnInit {
 
   public switchShape() {
     this._isSphere = !this._isSphere;
-
-    this._gameSphere.gameStep();
-    this._gameRectangle.gameStep();
-    this._gameOfLife.nextGenerationAliveCells = this._nextGenerationAliveCells;
-    this._gameOfLife.checkAliveCells();
-    this._gameRectangle.drawAliveCells(this._aliveCells);
-    this._gameSphere.drawAliveCells(this._aliveCells);
   }
 
   public gameStop() {
     this._isRun = false;
   }
-
 }

@@ -29,7 +29,7 @@ export class GameSphereComponent implements OnInit {
     let path: any = d3.geoPath().projection(projection);
     let sphereElement: any = d3.select('.game-sphere--sphere');
     let points: any[] = this.points;
-    let hexsPoints: any[] = [];    
+    let hexsPoints: any[] = [];
 
     sphereElement.append('svg')
       .attr('class', 'sphere');
@@ -145,7 +145,7 @@ export class GameSphereComponent implements OnInit {
 
         if (coordinateY % 2 == 1) {
           coordinateX += 0.5;
-        }        
+        }
 
         let aliveCell: AliveCell = new AliveCell(coordinateX, coordinateY);
         aliveCells.push(aliveCell);

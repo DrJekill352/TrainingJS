@@ -1,4 +1,4 @@
-import {Cell} from './cell';
+  import {Cell} from './cell';
 import {GameField} from './game-field';
 import {AliveCell} from './alive-cell';
 import {Observable, Subject} from 'rxjs';
