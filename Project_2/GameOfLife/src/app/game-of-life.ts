@@ -1,4 +1,4 @@
-  import {Cell} from './cell';
+import {Cell} from './cell';
 import {GameField} from './game-field';
 import {AliveCell} from './alive-cell';
 import {Observable, Subject} from 'rxjs';
@@ -59,7 +59,7 @@ export class GameOfLife {
     }
   }
 
-  private updateCells(nextGenerationAliveCells): void {
+  private updateCells(nextGenerationAliveCells: AliveCell[]): void {
     let bornCells: AliveCell[] = nextGenerationAliveCells.filter(x => {
       let bornCell = this._aliveCells.find(cell => cell.coordinateX == x.coordinateX &&
       cell.coordinateY == x.coordinateY);
@@ -69,21 +69,19 @@ export class GameOfLife {
     });
 
     let deadCells: AliveCell[] = this._aliveCells.filter((x: AliveCell) => {
-      let deadCell: boolean = nextGenerationAliveCells.find(cell => {
-        cell.coordinateX == x.coordinateX && cell.coordinateY == x.coordinateY
-      });
-      if (deadCell !== undefined) {
+      let deadCell = nextGenerationAliveCells.find((cell) => cell.coordinateX == x.coordinateX &&
+        cell.coordinateY == x.coordinateY
+      );
+      if (deadCell == undefined) {
         return true;
       }
     });
-    if (bornCells) {
+    if (bornCells.length > 0) {
       for (let bornCell of bornCells) {
-        if (bornCell.coordinateX == 0 && bornCell.coordinateY == 5 || bornCell.coordinateX == 35.5 && bornCell.coordinateY == 5) {
-        }
         this._field.toggleCellLiveState(bornCell.coordinateX, bornCell.coordinateY);
       }
     }
-    if (deadCells) {
+    if (deadCells.length > 0) {
       for (let deadCell of deadCells) {
         this._field.toggleCellLiveState(deadCell.coordinateX, deadCell.coordinateY);
       }
@@ -119,7 +117,7 @@ export class GameOfLife {
     this.updateAliveCells(cells);
   }
 
-  public checkAliveCells():void{
+  public checkAliveCells(): void {
     this.updateCells(this._nextGenerationAliveCells);
     let cells: Cell[] = this._field.cells;
     this.updateAliveCells(cells);

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AliveCell } from '../alive-cell';
 import * as d3 from 'd3';
 import { Observable, Subject } from 'rxjs';
@@ -8,7 +8,6 @@ import { Observable, Subject } from 'rxjs';
   templateUrl: './game-rectangle.component.html',
   styleUrls: ['./game-rectangle.component.css'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameRectangleComponent implements OnInit {
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
