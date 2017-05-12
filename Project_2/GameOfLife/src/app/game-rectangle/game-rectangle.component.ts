@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AliveCell } from '../alive-cell';
+import {Component, OnInit, ViewEncapsulation, Input} from '@angular/core';
+import {AliveCell} from '../alive-cell';
 import * as d3 from 'd3';
-import { Observable, Subject } from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'game-rectangle',
@@ -10,6 +10,7 @@ import { Observable, Subject } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class GameRectangleComponent implements OnInit {
+  @Input('aliveCells') _generationAliveCells: AliveCell[];
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
 
   constructor() {
@@ -43,7 +44,11 @@ export class GameRectangleComponent implements OnInit {
       .append('path')
       .attr("d", (p) => {
         return this.getHexSvgPath(p);
-      })
+      });
+
+    if (this._generationAliveCells.length > 0) {
+      this.drawAliveCells(this._generationAliveCells);
+    }
 
     if (document.querySelector('.game-rectangle--rectangle-polygons') != null) {
       document.querySelector('.game-rectangle--rectangle-polygons').addEventListener('click', this.onSelectCell);
@@ -56,13 +61,14 @@ export class GameRectangleComponent implements OnInit {
     for (let i = 20; i <= 500; i += 30) {
       if ((i / 10) % 2 == 0) {
         for (let j = 20; j < 1100; j += 30) {
-          let point: any = { x: j, y: i };
+
+          let point: any = {x: j, y: i};
           points.push(point);
         }
       } else {
         let d = 0;
         for (let j = 35; j < 1100; j += 30) {
-          let point: any = { x: j, y: i };
+          let point: any = {x: j, y: i};
           points.push(point);
         }
       }

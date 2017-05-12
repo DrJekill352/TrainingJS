@@ -17,11 +17,11 @@
     </div>
   </div>
   <div class="app-component--sphere" *ngIf="_isSphere; else rectangle">
-    <game-sphere></game-sphere>
+    <game-sphere [aliveCells]="_aliveCells"></game-sphere>
   </div>
   <ng-template #rectangle>
     <div class="app-component--rectangle">
-      <game-rectangle></game-rectangle>
+      <game-rectangle [aliveCells]="_aliveCells"></game-rectangle>
     </div>
   </ng-template>
 </div>

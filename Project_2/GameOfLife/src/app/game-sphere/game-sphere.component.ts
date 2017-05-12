@@ -1,17 +1,17 @@
-import { Component, ViewEncapsulation, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AliveCell } from '../alive-cell';
+import {Component, ViewEncapsulation, OnInit, Input} from '@angular/core';
+import {AliveCell} from '../alive-cell';
 
 import * as d3 from 'd3';
-import { Observable, Subject } from 'rxjs/Rx';
+import {Observable, Subject} from 'rxjs/Rx';
 
 @Component({
   selector: 'game-sphere',
   templateUrl: './game-sphere.component.html',
   styleUrls: ['./game-sphere.component.css'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  encapsulation: ViewEncapsulation.None
 })
 export class GameSphereComponent implements OnInit {
+  @Input('aliveCells') _generationAliveCells: AliveCell[];
   private _aliveCellsSubject: Subject<AliveCell[]> = new Subject<AliveCell[]>();
   private _isMove: boolean = false;
   private _elapsed: number = 0;
@@ -42,7 +42,7 @@ export class GameSphereComponent implements OnInit {
 
     svg.append('path')
       .attr('class', 'sphere--sphere')
-      .datum({ type: 'Sphere' })
+      .datum({type: 'Sphere'})
       .attr('d', path);
 
     svg.append('g')
@@ -52,6 +52,10 @@ export class GameSphereComponent implements OnInit {
       .enter()
       .append('path')
       .attr('d', path);
+
+    if (this._generationAliveCells.length > 0) {
+      this.drawAliveCells(this._generationAliveCells);
+    }
 
     if (document.querySelector('.sphere--sphere-polygons') != null) {
       document.querySelector('.sphere--sphere-polygons').addEventListener('click', this.onSelectCell);
@@ -86,13 +90,13 @@ export class GameSphereComponent implements OnInit {
     for (let i = -80; i <= 80; i += 10) {
       if ((i / 10) % 2 == 0) {
         for (let j = 0; j < 360; j += 10) {
-          let point: any = { x: j, y: i };
+          let point: any = {x: j, y: i};
           points.push(point);
         }
       } else {
         let d = 0;
         for (let j = 5; j < 360; j += 10) {
-          let point: any = { x: j, y: i };
+          let point: any = {x: j, y: i};
           points.push(point);
         }
       }

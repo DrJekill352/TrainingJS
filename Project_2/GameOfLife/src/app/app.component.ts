@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     this._isView = this.getIsView();
   }
 
-  private getIsView():boolean{
+  private getIsView(): boolean {
     if (document.documentElement.clientWidth < 600) {
       return false;
     } else {
@@ -69,6 +69,11 @@ export class AppComponent implements OnInit {
 
   public switchShape() {
     this._isSphere = !this._isSphere;
+
+    this._gameSphere.gameStep();
+    this._gameRectangle.gameStep();
+    this._gameOfLife.nextGenerationAliveCells = this._nextGenerationAliveCells;
+    this._gameOfLife.checkAliveCells();
   }
 
   public gameStop() {
