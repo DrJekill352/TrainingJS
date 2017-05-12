@@ -15,14 +15,12 @@ export class AppComponent implements OnInit {
   private _gameOfLife: GameOfLife = new GameOfLife();
   private _gameSphere: GameSphereComponent = new GameSphereComponent();
   private _gameRectangle: GameRectangleComponent = new GameRectangleComponent();
-
   private _nextGenerationAliveCells: AliveCell[] = [];
   private _aliveCells: AliveCell[] = [];
-
   private _isRun: boolean = false;
 
-  public _isSphere: boolean = true;
-  public _isView: boolean = false;
+  public isSphere: boolean = true;
+  public isView: boolean = false;
 
   constructor() {
 
@@ -37,7 +35,7 @@ export class AppComponent implements OnInit {
       this._nextGenerationAliveCells = nextGenerationAliveCells;
     });
 
-    this._isView = this.getIsView();
+    this.isView = this.getIsView();
   }
 
   private getIsView(): boolean {
@@ -48,7 +46,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public gameStep() {
+  public checkIsView(event): void {
+    let width: number = event.target.innerWidth;
+    if (width < 600) {
+      this.isView = false;
+    } else {
+      this.isView = true;
+    }
+  }
+
+  public gameStep(): void {
     this._gameSphere.gameStep();
     this._gameRectangle.gameStep();
     this._gameOfLife.nextGenerationAliveCells = this._nextGenerationAliveCells;
@@ -57,7 +64,7 @@ export class AppComponent implements OnInit {
     this._gameSphere.drawAliveCells(this._aliveCells);
   }
 
-  public gameRun() {
+  public gameRun(): void {
     this._isRun = true;
     let work = d3.interval(() => {
       if (this._isRun === false) {
@@ -67,8 +74,8 @@ export class AppComponent implements OnInit {
     }, 1000);
   }
 
-  public switchShape() {
-    this._isSphere = !this._isSphere;
+  public switchShape(): void {
+    this.isSphere = !this.isSphere;
 
     this._gameSphere.gameStep();
     this._gameRectangle.gameStep();
@@ -76,7 +83,7 @@ export class AppComponent implements OnInit {
     this._gameOfLife.checkAliveCells();
   }
 
-  public gameStop() {
+  public gameStop(): void {
     this._isRun = false;
   }
 }

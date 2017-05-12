@@ -1,9 +1,10 @@
-.game-rectangle--rectangle{
+.game-rectangle--rectangle {
   width: 1200px;
   height: 530px;
   margin: 10px 0 0 10px;
 }
-.game-rectangle--rectangle-polygons{
+
+.game-rectangle--rectangle-polygons {
   stroke: #444;
   fill: white;
 }

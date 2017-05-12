@@ -1,5 +1,5 @@
-<div class="app-component--header">Game Of Life</div>
-<div class="app-component--content" *ngIf="_isView">
+<div class="app-component--header" (window:resize)="checkIsView($event)">Game Of Life</div>
+<div class="app-component--content" *ngIf="isView">
   <div class="app-component--game-buttons">
     <div class="game-buttons">
       <div class="game-buttos--switch-shape-button-wrapper">
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="app-component--sphere" *ngIf="_isSphere; else rectangle">
+  <div class="app-component--sphere" *ngIf="isSphere; else rectangle">
     <game-sphere [aliveCells]="_aliveCells"></game-sphere>
   </div>
   <ng-template #rectangle>
@@ -25,7 +25,7 @@
     </div>
   </ng-template>
 </div>
-<div class="app-component--not-pass" *ngIf="!_isView" >
+<div class="app-component--not-pass" *ngIf="!isView">
   <img class="app-component--not-pass-img" src="../assets/you_shall_not_pass.jpg" alt="YOU SHALL NOT PASS">
   <span class="app-component--not-pass-text">Sorry. But your device has a too small screen</span>
 </div>

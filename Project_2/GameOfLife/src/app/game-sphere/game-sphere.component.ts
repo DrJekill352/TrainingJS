@@ -62,7 +62,7 @@ export class GameSphereComponent implements OnInit {
     }
   }
 
-  private getHexPolygon(centerPoint): any {
+  private getHexPolygon(centerPoint: any): any {
     let hexSideLenght: number = 6.4;
     let normalLineLenght: number = Math.sqrt(3) * (6 / 2);
 
